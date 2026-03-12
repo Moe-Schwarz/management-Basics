@@ -3,28 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FOM | Management Basics Professional</title>
+    <title>Moe's Lernbar | Management Basics</title>
     
     <!-- TAILWIND CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- KONFIGURATION: NEUTRALES BRANDING (Orange/Grau) -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     colors: {
-                        fom: {
-                            primary: '#00665E',  
-                            dark: '#004A44',
-                            accent: '#A5C9C5',
-                            gray: '#333333',
-                            light: '#F4F5F7',
-                            error: '#C62828',
-                            gold: '#D4AF37',
-                            coffee: '#FFDD00'
+                        moe: {
+                            primary: '#F97316',  /* Warm Orange (Tailwind Orange 500) */
+                            dark: '#C2410C',     /* Darker Orange (Tailwind Orange 700) */
+                            accent: '#FDBA74',   /* Light Orange (Tailwind Orange 300) */
+                            gray: '#4B5563',     /* Neutral Gray (Tailwind Gray 600) */
+                            light: '#FFF7ED',    /* Very Light Orange for Backgrounds (Tailwind Orange 50) */
+                            error: '#EF4444',    /* Red for wrong */
+                            gold: '#F59E0B',     /* Gold/Amber for expert */
+                            coffee: '#EAB308'    /* Amber for Coffee Button */
                         }
                     },
-                    fontFamily: { sans: ['Arial', 'Helvetica', 'sans-serif'] },
+                    fontFamily: {
+                        sans: ['Inter', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', 'sans-serif'], 
+                    },
                     animation: {
                         'fade-in': 'fadeIn 0.4s ease-out',
                         'slide-up': 'slideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1)',
@@ -39,28 +42,28 @@
     </script>
 
     <style>
+        /* Progress Circle */
         .progress-ring__circle {
-            transition: stroke-dashoffset 0.8s ease-in-out;
+            transition: stroke-dashoffset 1s cubic-bezier(0.4, 0, 0.2, 1);
             transform: rotate(-90deg);
             transform-origin: 50% 50%;
         }
         
-        /* Deep Academic Content Styling */
-        .learn-article h3 { font-size: 1.8rem; font-weight: 800; color: #00665E; margin-top: 2.5rem; margin-bottom: 1.2rem; border-bottom: 3px solid #A5C9C5; padding-bottom: 0.4rem; display: block; }
-        .learn-article h4 { font-size: 1.4rem; font-weight: 700; color: #333333; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid #00665E; padding-left: 1rem; }
-        .learn-article h5 { font-size: 1.15rem; font-weight: bold; color: #00665E; margin-top: 1.5rem; margin-bottom: 0.5rem; }
-        .learn-article p { margin-bottom: 1.2rem; line-height: 1.8; color: #4A4A4A; font-size: 1.05rem; text-align: justify; }
-        .learn-article ul { list-style: none; padding-left: 0; margin-bottom: 1.8rem; }
-        .learn-article li { position: relative; padding-left: 1.8rem; margin-bottom: 0.6rem; line-height: 1.7; color: #4A4A4A; font-size: 1.05rem;}
-        .learn-article li::before { content: "■"; color: #00665E; font-size: 0.8rem; position: absolute; left: 0.2rem; top: 0.35rem; }
-        .learn-article strong { color: #111111; font-weight: 700; }
+        /* Learning Content Typography - Deep Reading Optimized */
+        .learn-article h3 { font-size: 1.7rem; font-weight: bold; color: #F97316; margin-top: 2.5rem; margin-bottom: 1.2rem; border-bottom: 3px solid #FDBA74; display: block; padding-bottom: 0.4rem;}
+        .learn-article h4 { font-size: 1.3rem; font-weight: bold; color: #374151; margin-top: 2rem; margin-bottom: 0.8rem; }
+        .learn-article h5 { font-size: 1.1rem; font-weight: bold; color: #F97316; margin-top: 1.2rem; margin-bottom: 0.5rem; }
+        .learn-article p { margin-bottom: 1.2rem; line-height: 1.8; color: #4B5563; font-size: 1.05rem; text-align: justify; }
+        .learn-article ul { list-style: none; padding-left: 0; margin-bottom: 1.5rem; }
+        .learn-article li { position: relative; padding-left: 1.5rem; margin-bottom: 0.6rem; line-height: 1.7; color: #4B5563; font-size: 1.05rem;}
+        .learn-article li::before { content: "■"; color: #F97316; font-size: 0.8rem; position: absolute; left: 0; top: 0.35rem; }
+        .learn-article strong { color: #111827; font-weight: 700; }
+        .learn-article .box-info { background: #FFF7ED; border-left: 5px solid #F97316; padding: 1.5rem; margin: 2rem 0; border-radius: 0.25rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
+        .learn-article .box-highlight { background: #FEF3C7; border-left: 5px solid #D97706; padding: 1.5rem; margin: 2rem 0; border-radius: 0.25rem; }
         
-        .box-info { background: #E6F0EF; border-left: 5px solid #00665E; padding: 1.5rem; margin: 2rem 0; border-radius: 0.25rem; box-shadow: 0 2px 4px rgba(0,0,0,0.05);}
-        .box-highlight { background: #FFF9E6; border-left: 5px solid #D4AF37; padding: 1.5rem; margin: 2rem 0; border-radius: 0.25rem; }
-
-        /* Tables for Hub */
+        /* Tables */
         .academic-table { width: 100%; border-collapse: collapse; margin: 1.5rem 0; font-size: 0.95rem; }
-        .academic-table th { background-color: #00665E; color: white; padding: 10px; text-align: left; border: 1px solid #004A44; }
+        .academic-table th { background-color: #F97316; color: white; padding: 10px; text-align: left; border: 1px solid #C2410C; }
         .academic-table td { padding: 10px; border: 1px solid #ddd; background-color: white; color: #333; }
         .academic-table tr:nth-child(even) td { background-color: #f9f9f9; }
 
@@ -71,32 +74,53 @@
         .rotate-y-180 { transform: rotateY(180deg); }
         .flashcard-inner { transition: transform 0.6s cubic-bezier(0.4, 0.2, 0.2, 1); }
         
+        /* Scrollbar */
         .custom-scroll::-webkit-scrollbar { width: 8px; }
         .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #A5C9C5; border-radius: 4px; }
-        
-        .ai-formatted strong { color: #00665E; font-weight: bold; }
-        .ai-formatted em { font-style: italic; color: #333333; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #FDBA74; border-radius: 4px; }
+        .custom-scroll::-webkit-scrollbar-thumb:hover { background: #F97316; }
+
+        /* AI Text Formatting */
+        .ai-formatted strong { color: #F97316; font-weight: bold; }
+        .ai-formatted em { font-style: italic; color: #374151; }
     </style>
 </head>
-<body class="bg-fom-light text-fom-gray min-h-screen flex flex-col font-sans">
+<body class="bg-gray-50 text-moe-gray min-h-screen flex flex-col font-sans selection:bg-moe-primary selection:text-white">
 
     <!-- HEADER -->
-    <header class="bg-white border-b-4 border-fom-primary sticky top-0 z-50 shadow-md">
+    <header class="bg-white border-b-4 border-moe-primary sticky top-0 z-50 shadow-sm">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-4 cursor-pointer" onclick="app.goHome()">
+            <div class="flex items-center gap-4 cursor-pointer group" onclick="app.goHome()">
                 <div class="flex flex-col border-r-2 border-gray-200 pr-4">
-                    <span class="font-bold text-3xl tracking-tighter text-fom-primary leading-none">FOM</span>
+                    <span class="font-bold text-2xl tracking-tight text-moe-primary leading-none">Moe's Lernbar</span>
                 </div>
                 <div class="flex flex-col hidden sm:flex">
-                    <span class="font-bold text-sm text-fom-gray uppercase tracking-widest leading-none mb-1">Hochschule</span>
-                    <span class="text-xs text-gray-500">Management Basics Hub</span>
+                    <span class="font-semibold text-sm text-gray-600 uppercase tracking-widest">Management Basics</span>
+                    <span class="text-xs text-gray-500">Professional Training</span>
                 </div>
             </div>
             
-            <div class="flex gap-3">
-                <button onclick="app.switchView('view-flashcards')" class="px-4 py-2 rounded bg-fom-light hover:bg-gray-200 text-fom-gray text-sm font-bold transition-all shadow-sm">🗂️ Karten</button>
-                <button onclick="app.switchView('view-learning')" class="px-4 py-2 rounded bg-fom-primary hover:bg-fom-dark text-white text-sm font-bold transition-all shadow-sm">📖 Skript</button>
+            <div class="flex gap-2 items-center flex-wrap justify-end">
+                <!-- COFFEE BUTTON IM HEADER -->
+                <a href="https://paypal.me/MoeSchwarz" target="_blank" class="hidden lg:flex items-center gap-2 px-3 py-2 rounded bg-moe-coffee hover:bg-yellow-500 text-white text-sm font-bold transition-all shadow-sm">
+                    ☕ Kaffeekasse
+                </a>
+                <button onclick="document.getElementById('modal-btc').classList.remove('hidden')" class="hidden lg:flex items-center gap-2 px-3 py-2 rounded bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold transition-all shadow-sm">
+                    ⚡ Lightning
+                </button>
+
+                <div class="w-px h-6 bg-gray-300 mx-2 hidden lg:block"></div>
+
+                <!-- NAVIGATION BUTTONS -->
+                <button onclick="app.goHome()" class="flex items-center gap-2 px-3 py-2 rounded bg-white border border-gray-200 hover:bg-gray-50 text-moe-gray text-sm font-bold transition-all shadow-sm">
+                    📊 Dashboard
+                </button>
+                <button onclick="app.switchView('view-flashcards')" class="flex items-center gap-2 px-3 py-2 rounded bg-moe-light hover:bg-orange-100 text-moe-dark text-sm font-bold transition-all shadow-sm">
+                    🗂️ Karten
+                </button>
+                <button onclick="app.switchView('view-learning')" class="flex items-center gap-2 px-3 py-2 rounded bg-moe-primary hover:bg-moe-dark text-white text-sm font-bold transition-all shadow-sm">
+                    📖 Skript
+                </button>
             </div>
         </div>
     </header>
@@ -104,219 +128,299 @@
     <!-- MAIN -->
     <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 relative">
         
-        <!-- DASHBOARD -->
+        <!-- VIEW: DASHBOARD -->
         <div id="view-dashboard" class="space-y-10 animate-fade-in">
             <div class="text-center max-w-3xl mx-auto pt-6">
-                <h1 class="text-4xl md:text-5xl font-bold text-fom-gray mb-4">Management <span class="text-fom-primary">Basics</span></h1>
-                <p class="text-lg text-gray-500 mb-6 leading-relaxed">Prüfungsrelevantes Wissen nach Vorlesung (Säule 0 bis 5). Fokus auf Rechtsformen, Formeln und Beschaffung.</p>
+                <h1 class="text-4xl md:text-5xl font-bold text-moe-gray mb-4">Management <span class="text-moe-primary">Basics</span></h1>
+                <p class="text-lg text-gray-500 mb-6">Gesundheitswesen & Gefahrenabwehr. Das vollwertige digitale Vorlesungsskript.</p>
                 
-                <!-- CREATOR MESSAGE -->
-                <div class="bg-blue-50 border border-blue-100 text-blue-800 p-6 rounded-xl mb-8 shadow-sm text-center">
-                    <p class="mb-4 font-medium">👋 Hey Kommilitonen! Hat dir dieses Tool beim Lernen geholfen? Über einen kleinen Support würde ich mich riesig freuen!</p>
+                <!-- CREATOR MESSAGE / KAFFEEKASSE -->
+                <div class="bg-blue-50 border border-blue-100 text-blue-800 p-6 rounded-xl max-w-2xl mx-auto mb-8 shadow-sm text-center">
+                    <p class="mb-4 text-base leading-relaxed"><strong>👋 Hey!</strong> Hat dir diese Lernhilfe geholfen, besser durch den Stoff zu kommen? Wenn du hier Zeit und Nerven gespart hast, freue ich mich riesig über einen kleinen Tip in die Kaffeekasse! ☕💙</p>
                     <div class="flex flex-wrap justify-center gap-3">
-                        <a href="https://paypal.me/MoeSchwarz" target="_blank" class="flex items-center gap-2 px-5 py-2 rounded-full bg-[#0070ba] text-white text-sm font-bold transition-all hover:opacity-90 shadow-sm">
-                            <span>💙</span> PayPal
+                        <a href="https://paypal.me/MoeSchwarz" target="_blank" class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#0070ba] text-white text-sm font-bold transition-all hover:bg-blue-700 shadow">
+                            <span>💳</span> PayPal
                         </a>
-                        <button onclick="document.getElementById('modal-btc').classList.remove('hidden')" class="flex items-center gap-2 px-5 py-2 rounded-full bg-[#f7931a] text-white text-sm font-bold transition-all hover:opacity-90 shadow-sm">
+                        <button onclick="document.getElementById('modal-btc').classList.remove('hidden')" class="flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#f7931a] text-white text-sm font-bold transition-all hover:bg-orange-600 shadow">
                             <span>⚡</span> Lightning
                         </button>
                     </div>
                 </div>
 
                 <div class="flex flex-wrap justify-center gap-4">
-                    <button onclick="app.switchView('view-flashcards')" class="bg-white border border-gray-300 px-8 py-3 rounded shadow-sm hover:border-fom-primary font-bold text-fom-gray transition-all">Flashcards lernen</button>
-                    <button onclick="app.switchView('view-learning')" class="bg-fom-primary text-white px-8 py-3 rounded shadow-md hover:bg-fom-dark font-bold transition-all">Wissens-Hub lesen</button>
+                    <button onclick="app.resetData()" class="text-sm text-gray-400 hover:text-moe-error underline self-center px-4">Lernstand komplett löschen</button>
                 </div>
             </div>
 
-            <!-- Master Exam Card -->
-            <div onclick="app.checkQuizStart('all')" class="group relative bg-white rounded-lg p-8 shadow-lg cursor-pointer hover:shadow-xl transition-all border-l-8 border-fom-primary overflow-hidden">
+            <!-- Master Quiz Card -->
+            <div onclick="app.checkQuizStart('all')" class="group relative bg-white rounded p-8 shadow-lg cursor-pointer hover:shadow-xl transition-all duration-300 border-l-8 border-moe-primary overflow-hidden">
                 <div class="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
                     <div class="flex-1 text-center md:text-left">
                         <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
-                            <span class="px-3 py-1 rounded bg-fom-primary text-white text-xs font-bold uppercase tracking-wider">Klausur</span>
-                            <span class="px-3 py-1 rounded bg-fom-gold/10 text-fom-gold border border-fom-gold/30 text-xs font-bold uppercase tracking-wider">★ 50 Fragen</span>
+                            <span class="px-3 py-1 rounded bg-moe-primary text-white text-xs font-bold uppercase tracking-wider">Klausur-Simulation</span>
+                            <span class="px-3 py-1 rounded bg-yellow-100 text-moe-gold border border-yellow-300 text-xs font-bold uppercase tracking-wider">★ 50 aus 76 Fragen</span>
                         </div>
-                        <h2 class="text-2xl font-bold text-fom-gray mb-2">Master-Prüfungssimulation</h2>
-                        <p class="text-gray-500">Zufällige Auswahl von 50 Fragen. Sei vorsichtig: Nicht immer ist die längste Antwort die richtige! Prüft auch detailliertes Wissen zu Beschaffung und Planungsstufen.</p>
+                        <h2 class="text-2xl font-bold text-moe-gray mb-2">Master-Prüfung: Management Basics</h2>
+                        <p class="text-gray-500">Der Algorithmus generiert eine Klausur mit 50 Fragen aus allen Vorlesungsteilen. Modul-Ergebnisse zählen hier nicht hinein.</p>
                     </div>
-                    <div class="relative w-28 h-28 flex-shrink-0 mx-auto md:mx-0">
-                        <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
-                            <circle cx="50" cy="50" r="40" fill="none" stroke="#E5E7EB" stroke-width="8" />
-                            <circle id="dash-master-prog" cx="50" cy="50" r="40" fill="none" stroke="#00665E" stroke-width="8" stroke-dasharray="251.3" stroke-dashoffset="251.3" class="progress-ring__circle" stroke-linecap="round" />
+                    <!-- Circle Master -->
+                    <div class="relative w-28 h-28 flex-shrink-0">
+                        <svg class="w-full h-full transform -rotate-90">
+                            <circle cx="50%" cy="50%" r="45" fill="none" stroke="#E5E7EB" stroke-width="8" />
+                            <circle id="dash-master-prog" cx="50%" cy="50%" r="45" fill="none" stroke="#F97316" stroke-width="8" stroke-dasharray="282.7" stroke-dashoffset="282.7" class="progress-ring__circle" stroke-linecap="round" />
                         </svg>
-                        <div class="absolute inset-0 flex flex-col items-center justify-center text-fom-gray font-bold text-xl" id="dash-master-text">0%</div>
+                        <div class="absolute inset-0 flex flex-col items-center justify-center">
+                            <span id="dash-master-text" class="text-moe-gray font-bold text-xl">0%</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex justify-between items-end border-b pb-2 mt-12 mb-4">
-                <h3 class="text-xl font-bold text-fom-gray">Modul-Training (Nach Skript)</h3>
-                <button onclick="app.resetData()" class="text-xs text-gray-400 hover:text-fom-error underline">Lernstand löschen</button>
-            </div>
-            
+            <h3 class="text-xl font-bold text-moe-gray mt-12 mb-4 border-b pb-2">Die Gliederung der Vorlesung (Module)</h3>
             <!-- Pillars Grid -->
             <div id="cluster-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
         </div>
 
-        <!-- FLASHCARDS VIEW -->
-        <div id="view-flashcards" class="hidden h-[calc(100vh-140px)] animate-fade-in flex flex-col items-center justify-center">
-            <div class="w-full max-w-2xl mb-6 flex justify-between items-center shrink-0 px-4">
-                <h2 class="text-2xl font-bold text-fom-gray">Active Recall</h2>
-                <span class="text-gray-500 font-bold" id="fc-counter">1 / X</span>
-                <button onclick="app.goHome()" class="text-fom-primary font-bold hover:underline">✕ Schließen</button>
+        <!-- VIEW: FLASHCARDS -->
+        <div id="view-flashcards" class="hidden h-[calc(100vh-120px)] animate-fade-in flex flex-col items-center justify-center">
+            <div class="w-full max-w-2xl mb-6 flex justify-between items-center shrink-0">
+                <h2 class="text-2xl font-bold text-moe-gray">Flashcards</h2>
+                <span class="text-gray-500 font-bold" id="fc-counter">1 / 65</span>
+                <button onclick="app.goHome()" class="text-moe-primary hover:text-moe-dark font-bold">✕ Schließen</button>
             </div>
+
+            <!-- Card Container -->
             <div class="w-full max-w-2xl h-80 perspective-1000 cursor-pointer shrink-0" onclick="app.flipFlashcard()">
-                <div id="flashcard-inner" class="w-full h-full relative transform-style-3d flashcard-inner shadow-2xl rounded-xl">
-                    <div class="absolute w-full h-full backface-hidden bg-white border-2 border-fom-accent rounded-xl flex flex-col items-center justify-center p-8 text-center">
-                        <span class="text-xs font-bold text-fom-primary uppercase tracking-widest mb-4">Begriff</span>
-                        <h3 id="fc-front" class="text-2xl md:text-3xl font-bold text-fom-gray leading-tight">Lade...</h3>
-                        <p class="text-gray-400 mt-8 text-sm opacity-60">Tippen zum Umdrehen</p>
+                <div id="flashcard-inner" class="w-full h-full relative transform-style-3d flashcard-inner shadow-xl rounded-xl">
+                    <!-- Front -->
+                    <div class="absolute w-full h-full backface-hidden bg-white border-2 border-moe-accent rounded-xl flex flex-col items-center justify-center p-8 text-center">
+                        <span class="text-sm font-bold text-moe-primary uppercase tracking-widest mb-4">Begriff</span>
+                        <h3 id="fc-front" class="text-3xl font-bold text-moe-gray leading-tight">Lade...</h3>
+                        <p class="text-gray-400 mt-8 text-sm">Klicken zum Umdrehen</p>
                     </div>
-                    <div class="absolute w-full h-full backface-hidden bg-fom-primary rounded-xl flex flex-col items-center justify-center p-8 text-center rotate-y-180">
-                        <span class="text-xs font-bold text-fom-accent uppercase tracking-widest mb-4">Definition</span>
-                        <p id="fc-back" class="text-lg md:text-xl text-white leading-relaxed overflow-y-auto">Lade...</p>
+                    <!-- Back -->
+                    <div class="absolute w-full h-full backface-hidden bg-moe-primary rounded-xl flex flex-col items-center justify-center p-8 text-center rotate-y-180">
+                        <span class="text-sm font-bold text-moe-light uppercase tracking-widest mb-4">Definition</span>
+                        <p id="fc-back" class="text-xl text-white font-medium leading-relaxed overflow-y-auto">Lade...</p>
                     </div>
                 </div>
             </div>
-            <div class="w-full max-w-2xl mt-8 flex gap-4 px-4">
-                <button onclick="app.nextFlashcard(-1)" class="flex-1 bg-white border border-gray-300 text-fom-gray py-3 rounded font-bold shadow-sm hover:bg-gray-50">❮ Zurück</button>
-                <button onclick="app.nextFlashcard(1)" class="flex-1 bg-fom-primary text-white py-3 rounded font-bold shadow-sm hover:bg-fom-dark">Nächste ❯</button>
+
+            <div class="w-full max-w-2xl mt-8 flex justify-between gap-4 shrink-0">
+                <button onclick="app.nextFlashcard(-1)" class="flex-1 bg-white border border-gray-300 text-moe-gray py-3 rounded font-bold hover:bg-gray-50 shadow-sm">❮ Vorherige</button>
+                <button onclick="app.nextFlashcard(1)" class="flex-1 bg-moe-primary text-white py-3 rounded font-bold hover:bg-moe-dark shadow-sm">Nächste ❯</button>
             </div>
         </div>
 
-        <!-- LEARNING HUB VIEW -->
+        <!-- VIEW: LEARNING HUB -->
         <div id="view-learning" class="hidden h-[calc(100vh-140px)] animate-fade-in flex flex-col">
-            <div class="flex items-center justify-between mb-4 shrink-0 px-2">
-                <h2 class="text-2xl font-bold text-fom-gray">Digitales Vorlesungsskript</h2>
-                <button onclick="app.goHome()" class="text-fom-primary font-bold px-4 hover:underline">✕ Dashboard</button>
+            <div class="flex items-center justify-between mb-4 shrink-0">
+                <h2 class="text-2xl font-bold text-moe-gray">Wissens-Hub</h2>
+                <button onclick="app.goHome()" class="text-moe-primary hover:text-moe-dark font-bold px-4">✕ Zurück</button>
             </div>
             <div class="flex-grow grid grid-cols-1 lg:grid-cols-4 gap-6 overflow-hidden">
                 <div class="lg:col-span-1 space-y-2 overflow-y-auto custom-scroll pr-2" id="learn-menu"></div>
-                <div class="lg:col-span-3 bg-white shadow-xl border border-gray-200 overflow-hidden flex flex-col relative rounded-lg">
+                <div class="lg:col-span-3 bg-white shadow-md border border-gray-200 overflow-hidden flex flex-col relative rounded">
                     <div id="learn-placeholder" class="flex flex-col items-center justify-center h-full text-center text-gray-400 p-10">
-                        <span class="text-6xl mb-4 opacity-20">📚</span>
-                        <h3 class="text-xl font-bold">Kapitel auswählen</h3>
+                        <span class="text-6xl mb-4 opacity-20">📖</span>
+                        <h3 class="text-xl font-bold">Wähle ein Kapitel</h3>
                         <p class="mt-2">Das detaillierte Vorlesungsskript wird hier geladen.</p>
                     </div>
                     <div id="learn-content-scroll-area" class="hidden h-full overflow-y-auto custom-scroll">
                         <div id="learn-content" class="p-8 md:p-12 learn-article"></div>
-                        <div id="ai-tutor-section" class="mx-8 md:mx-12 mb-12 p-6 bg-fom-light rounded border border-fom-accent shadow-sm">
-                            <h4 class="text-lg font-bold text-fom-primary mb-2 flex items-center gap-2"><span>✨</span> KI-Tutor fragen</h4>
-                            <p class="text-sm text-fom-gray mb-4">Konzept nicht verstanden? Die KI erklärt es dir basierend auf diesem Skript.</p>
+                        
+                        <!-- AI TUTOR IN LEARNING HUB -->
+                        <div id="ai-tutor-section" class="mx-8 md:mx-12 mb-12 p-6 bg-moe-light rounded border border-moe-accent shadow-sm">
+                            <h4 class="text-lg font-bold text-moe-primary mb-2 flex items-center gap-2">
+                                <span>✨</span> Frag den KI-Tutor
+                            </h4>
+                            <p class="text-sm text-moe-gray mb-4">Hast du ein Konzept in diesem Kapitel nicht ganz verstanden? Stelle deine Frage direkt an unsere KI, die basierend auf dem Vorlesungsskript antwortet.</p>
                             <div class="flex flex-col sm:flex-row gap-3">
-                                <input type="text" id="ai-question-input" class="flex-1 p-3 rounded border border-gray-300 focus:ring-1 focus:ring-fom-primary focus:outline-none" placeholder="Frage hier stellen...">
-                                <button onclick="app.askAIInHub()" class="bg-fom-primary text-white px-6 py-3 rounded font-bold hover:bg-fom-dark" id="ai-ask-btn">Anfragen</button>
+                                <input type="text" id="ai-question-input" class="flex-1 p-3 rounded border border-gray-300 focus:outline-none focus:border-moe-primary focus:ring-1 focus:ring-moe-primary transition-all" placeholder="Z.B.: Erkläre mir nochmal das Beispiel mit Lisa & Max.">
+                                <button onclick="app.askAIInHub()" class="bg-moe-primary text-white px-6 py-3 rounded font-bold hover:bg-moe-dark transition-all flex items-center justify-center shrink-0 min-w-[120px]" id="ai-ask-btn">Fragen</button>
                             </div>
-                            <div id="ai-answer-box" class="hidden mt-4 p-5 bg-white border border-gray-200 rounded text-sm leading-relaxed ai-formatted shadow-inner"></div>
+                            <div id="ai-answer-box" class="hidden mt-4 p-5 bg-white border border-gray-200 rounded text-moe-gray text-sm leading-relaxed shadow-inner ai-formatted"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- QUIZ VIEW -->
+        <!-- VIEW: QUIZ -->
         <div id="view-quiz" class="hidden max-w-4xl mx-auto animate-fade-in pb-20">
-            <div class="bg-white p-4 shadow-sm mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-200 sticky top-2 z-40 rounded-lg">
+            <div class="bg-white p-4 shadow-sm mb-6 flex flex-col sm:flex-row items-center justify-between gap-4 border border-gray-200 sticky top-2 z-40 rounded">
                 <div class="flex items-center gap-4 w-full sm:w-auto">
-                    <div class="w-10 h-10 rounded bg-fom-primary text-white font-bold flex items-center justify-center text-lg" id="q-index">1</div>
+                    <div class="w-10 h-10 rounded bg-moe-primary text-white font-bold flex items-center justify-center text-lg" id="q-index">1</div>
                     <div class="flex flex-col">
-                        <span class="text-xs text-gray-400 font-bold uppercase block leading-none">Frage</span>
-                        <span class="text-lg font-bold text-fom-gray"><span id="q-current">1</span> / <span id="q-total">50</span></span>
+                        <span class="text-xs text-gray-400 font-bold uppercase block leading-none">Fortschritt</span>
+                        <span class="text-lg font-bold text-moe-gray"><span id="q-current">1</span> / <span id="q-total">50</span></span>
                     </div>
                 </div>
                 <div class="w-full sm:max-w-md h-2 bg-gray-200 overflow-hidden rounded">
-                    <div id="progress-bar" class="h-full bg-fom-primary transition-all duration-500 w-0"></div>
+                    <div id="progress-bar" class="h-full bg-moe-primary transition-all duration-500 w-0"></div>
                 </div>
                 <button onclick="app.goHome()" class="text-xs font-bold uppercase tracking-wider text-gray-500 border border-gray-300 px-4 py-2 rounded hover:bg-gray-100 transition-colors">Abbrechen</button>
             </div>
             
-            <div class="bg-white shadow-lg border border-gray-200 relative min-h-[400px] rounded-lg">
-                <div id="star-badge" class="hidden absolute top-0 right-0 bg-fom-gold text-white px-4 py-1 font-bold text-xs uppercase tracking-wider shadow-sm z-10 flex items-center gap-1 rounded-bl"><span>★</span> Transferaufgabe</div>
+            <div class="bg-white shadow-lg border border-gray-200 relative min-h-[400px] rounded">
+                <div id="star-badge" class="hidden absolute top-0 right-0 bg-moe-gold text-white px-4 py-1 font-bold text-xs uppercase tracking-wider shadow-sm z-10 flex items-center gap-1 rounded-bl"><span>★</span> Transferaufgabe</div>
                 <div class="p-8 md:p-10">
-                    <span id="q-cat-label" class="text-xs font-bold text-fom-primary bg-fom-light px-2 py-1 rounded uppercase mb-4 inline-block">Thema</span>
-                    <h2 id="q-text" class="text-xl md:text-2xl font-bold text-fom-gray mb-8 leading-snug">Frage...</h2>
+                    <span id="q-cat-label" class="inline-block px-2 py-1 bg-moe-light text-moe-primary text-xs font-bold uppercase tracking-wider mb-4 rounded">Thema</span>
+                    <h2 id="q-text" class="text-xl md:text-2xl font-bold text-moe-gray mb-8 leading-snug">Frage...</h2>
                     <div id="options-container" class="grid grid-cols-1 gap-3 mb-8"></div>
                     
-                    <div id="feedback-layer" class="hidden bg-fom-light p-6 border-l-4 border-fom-primary animate-slide-up rounded mb-4">
+                    <!-- Feedback Layer -->
+                    <div id="feedback-layer" class="hidden bg-moe-light p-6 border-l-4 border-moe-primary animate-slide-up rounded">
                         <div class="flex items-start gap-4">
                             <div id="fb-icon" class="w-10 h-10 rounded flex items-center justify-center shrink-0 text-xl font-bold text-white"></div>
                             <div class="flex-1 w-full">
-                                <h3 id="fb-title" class="font-bold text-xl mb-1"></h3>
-                                <div id="fb-text" class="text-fom-gray mb-4 text-md leading-relaxed"></div>
-                                <div class="bg-white p-3 border border-gray-200 rounded text-sm flex items-center gap-3 mb-4 shadow-sm">
+                                <h3 id="fb-title" class="font-bold text-xl mb-2"></h3>
+                                <div id="fb-text" class="text-moe-gray mb-4 text-md leading-relaxed"></div>
+                                <div class="bg-white p-4 border border-gray-200 flex gap-3 items-center rounded mb-4 shadow-sm">
                                     <span class="text-xl">💡</span>
-                                    <div><span class="block text-xs text-gray-400 font-bold uppercase">Merkregel</span> <span id="fb-memo" class="font-bold text-fom-primary"></span></div>
+                                    <div>
+                                        <span class="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">Merkregel</span>
+                                        <span id="fb-memo" class="text-moe-primary font-bold text-sm"></span>
+                                    </div>
                                 </div>
-                                <button onclick="app.explainWithAI()" class="text-sm text-fom-primary font-bold flex items-center gap-2 hover:text-fom-dark transition-colors" id="ai-explain-btn">
-                                    <span>✨</span> Lass dir das genauer von der KI erklären
-                                </button>
-                                <div id="ai-explain-box" class="hidden mt-3 p-4 bg-white border border-fom-accent rounded text-sm leading-relaxed ai-formatted shadow-inner"></div>
+                                
+                                <!-- AI Explanation Feature -->
+                                <div class="border-t border-gray-200 pt-4 mt-2">
+                                    <button id="ai-explain-btn" onclick="app.explainWithAI()" class="text-sm text-moe-primary font-bold flex items-center gap-2 hover:text-moe-dark transition-colors bg-white border border-moe-accent px-4 py-2 rounded shadow-sm hover:shadow">
+                                        <span>✨</span> Lass dir das genauer von der KI erklären
+                                    </button>
+                                    <div id="ai-explain-box" class="hidden mt-3 p-4 bg-white border border-moe-accent rounded text-sm text-moe-gray leading-relaxed shadow-inner ai-formatted"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="bg-gray-50 px-8 py-5 border-t border-gray-200 flex justify-end">
-                    <button id="btn-next" onclick="app.nextQuestion()" class="bg-fom-primary hover:bg-fom-dark text-white font-bold py-3 px-10 rounded shadow transition-all disabled:opacity-50 disabled:cursor-not-allowed">Weiter ❯</button>
+                    <button id="btn-next" onclick="app.nextQuestion()" class="bg-moe-primary hover:bg-moe-dark text-white font-bold py-3 px-10 rounded shadow transition-all disabled:opacity-50 disabled:cursor-not-allowed">Weiter ❯</button>
                 </div>
             </div>
         </div>
 
-        <!-- RESULTS VIEW -->
-        <div id="view-results" class="hidden max-w-4xl mx-auto animate-fade-in text-center pt-10 px-4 pb-20">
-            <div class="bg-white rounded-lg p-10 shadow-2xl border-t-8 border-fom-primary relative">
-                <h2 class="text-3xl font-bold mb-2">Prüfung abgeschlossen!</h2>
-                <p id="result-subtitle" class="text-gray-500 mb-8">Auswertung deiner Leistung.</p>
+        <!-- VIEW: RESULTS -->
+        <div id="view-results" class="hidden max-w-4xl mx-auto animate-fade-in text-center pt-10">
+            <div class="bg-white rounded p-12 shadow-xl border-t-8 border-moe-primary relative">
+                <h2 class="text-3xl font-bold text-moe-gray mb-2">Prüfungsergebnis</h2>
+                <p id="result-subtitle" class="text-gray-500 mb-8">Zusammenfassung deiner Leistung.</p>
                 
                 <div class="flex justify-center mb-8">
                     <div class="relative w-48 h-48 flex items-center justify-center">
                         <svg class="w-full h-full transform -rotate-90">
                             <circle cx="50%" cy="50%" r="80" stroke="#F3F4F6" stroke-width="12" fill="none"/>
-                            <circle id="res-circle" cx="50%" cy="50%" r="80" stroke="#00665E" stroke-width="12" fill="none" stroke-dasharray="502.6" stroke-dashoffset="502.6" class="progress-ring__circle" stroke-linecap="round" />
+                            <circle id="res-circle" cx="50%" cy="50%" r="80" stroke="#F97316" stroke-width="12" fill="none" stroke-dasharray="502.6" stroke-dashoffset="502.6" class="progress-ring__circle" stroke-linecap="round" />
                         </svg>
                         <div class="absolute inset-0 flex flex-col items-center justify-center">
-                            <span id="res-score" class="text-5xl font-bold text-fom-gray">0%</span>
+                            <span id="res-score" class="text-5xl font-bold text-moe-gray">0%</span>
                             <span class="text-xs text-gray-400 font-bold uppercase mt-1">Korrekt</span>
                         </div>
                     </div>
                 </div>
-                <p id="res-msg" class="text-lg font-bold mb-8 text-fom-gray"></p>
                 
-                <button onclick="app.goHome()" class="bg-fom-gray hover:bg-black text-white font-bold py-3 px-12 rounded shadow transition-all">Zurück zum Dashboard</button>
+                <p id="res-msg" class="text-lg font-bold text-moe-gray mb-10 max-w-xl mx-auto"></p>
+                
+                <!-- COFFEE PITCH ON SUCCESS -->
+                <div class="bg-blue-50 border border-blue-100 p-6 rounded-xl mb-10 max-w-lg mx-auto shadow-sm text-center">
+                    <h4 class="font-bold text-lg text-blue-900 mb-2">Hat dir das Training geholfen?</h4>
+                    <p class="text-sm text-blue-800 mb-5">Wenn du dich jetzt sicherer fühlst und die App nützlich fandest, freue ich mich riesig über einen kleinen Support für die Kaffeekasse! ☕</p>
+                    <div class="flex flex-wrap justify-center gap-3">
+                        <a href="https://paypal.me/MoeSchwarz" target="_blank" class="flex-1 flex justify-center items-center gap-2 px-4 py-3 rounded-xl bg-[#0070ba] text-white text-sm font-bold transition-all hover:bg-blue-700 shadow">
+                            <span>💳</span> PayPal
+                        </a>
+                        <button onclick="document.getElementById('modal-btc').classList.remove('hidden')" class="flex-1 flex justify-center items-center gap-2 px-4 py-3 rounded-xl bg-[#f7931a] text-white text-sm font-bold transition-all hover:bg-orange-600 shadow">
+                            <span>⚡</span> Lightning
+                        </button>
+                    </div>
+                </div>
+                
+                <button onclick="app.goHome()" class="bg-moe-gray hover:bg-black text-white font-bold py-3 px-10 rounded shadow transition-all">
+                    Zurück zur Übersicht
+                </button>
             </div>
         </div>
 
-        <!-- RETRY MODAL -->
-        <div id="modal-retry" class="fixed inset-0 z-[60] bg-gray-900/80 hidden flex items-center justify-center p-4">
-            <div class="bg-white rounded-lg max-w-md w-full p-8 shadow-2xl border-t-4 border-fom-primary text-center">
-                <h2 class="text-2xl font-bold mb-4 text-fom-gray">Wissenslücken schließen?</h2>
-                <p class="text-gray-500 mb-6 text-sm">Du hast in diesem Modul einige Fragen falsch beantwortet. Möchtest du gezielt nur diese Fehler trainieren?</p>
-                <button onclick="app.startQuizMode('retry')" class="w-full bg-fom-primary hover:bg-fom-dark text-white p-4 rounded font-bold mb-3 flex justify-between shadow transition-all">Nur Fehler wiederholen <span>↺</span></button>
-                <button onclick="app.startQuizMode('reset')" class="w-full border border-gray-300 hover:border-fom-error hover:text-fom-error text-fom-gray p-4 rounded font-bold flex justify-between transition-all">Alles zurücksetzen & neu <span>✕</span></button>
-                <button onclick="document.getElementById('modal-retry').classList.add('hidden')" class="mt-4 text-gray-400 text-xs font-bold uppercase tracking-widest hover:text-gray-600">Abbrechen</button>
+        <!-- MODAL: RETRY OPTION -->
+        <div id="modal-retry" class="fixed inset-0 z-[60] bg-gray-900/80 hidden flex items-center justify-center p-4 animate-fade-in">
+            <div class="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl relative border-t-4 border-moe-primary text-center">
+                <h2 class="text-2xl font-bold mb-4 text-moe-gray">Modul fortsetzen</h2>
+                <p class="text-gray-500 mb-6 text-sm">Du hast dieses Modul bereits bearbeitet. Wie möchtest du fortfahren?</p>
+                <div class="space-y-3">
+                    <button onclick="app.startQuizMode('retry')" class="w-full bg-moe-primary text-white p-4 rounded-xl font-bold text-left hover:bg-moe-dark flex justify-between shadow-sm transition-all">
+                        <span>Nur falsche Fragen wiederholen</span> <span>↺</span>
+                    </button>
+                    <button onclick="app.startQuizMode('reset')" class="w-full border border-gray-300 text-moe-gray p-4 rounded-xl font-bold text-left hover:border-moe-error hover:text-moe-error flex justify-between transition-all">
+                        <span>Komplett neu starten</span> <span>✕</span>
+                    </button>
+                </div>
+                <button onclick="document.getElementById('modal-retry').classList.add('hidden')" class="mt-6 w-full text-gray-400 text-sm font-bold hover:text-gray-600">Abbrechen</button>
             </div>
         </div>
-        
-        <!-- LIGHTNING MODAL -->
+
+        <!-- MODAL: PERFECT SCORE -->
+        <div id="modal-perfect" class="fixed inset-0 z-[60] bg-gray-900/80 hidden flex items-center justify-center p-4 animate-fade-in">
+            <div class="bg-white rounded-2xl max-w-md w-full p-8 shadow-2xl relative border-t-4 border-moe-primary text-center">
+                <div class="text-5xl mb-4">🏆</div>
+                <h2 class="text-2xl font-bold mb-2 text-moe-gray">Modul perfekt!</h2>
+                <p class="text-gray-500 mb-6 text-sm">Du hast bereits alle Fragen dieses Moduls richtig beantwortet. Möchtest du es zurücksetzen und neu üben?</p>
+                <div class="space-y-3">
+                    <button onclick="app.startQuizMode('reset')" class="w-full bg-moe-primary hover:bg-moe-dark text-white p-4 rounded-xl font-bold transition-colors">
+                        Neu starten ⟳
+                    </button>
+                    <button onclick="document.getElementById('modal-perfect').classList.add('hidden')" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-700 p-4 rounded-xl font-bold transition-colors">
+                        Zurück
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: CONFIRM ABORT -->
+        <div id="modal-abort" class="fixed inset-0 z-[100] bg-gray-900/80 hidden flex items-center justify-center p-4 animate-fade-in">
+            <div class="bg-white rounded-2xl max-w-sm w-full p-8 text-center shadow-2xl">
+                <div class="text-4xl mb-4">⏸️</div>
+                <h3 class="text-2xl font-bold mb-2 text-moe-gray">Quiz beenden?</h3>
+                <p class="text-sm text-gray-500 mb-8">Dein bisheriger Fortschritt wird automatisch gespeichert.</p>
+                <div class="flex gap-3">
+                    <button onclick="document.getElementById('modal-abort').classList.add('hidden')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-bold transition-colors">Weiter</button>
+                    <button onclick="app.confirmAbort()" class="flex-1 bg-moe-error hover:bg-red-600 text-white py-3 rounded-xl font-bold transition-colors">Beenden</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: CONFIRM RESET -->
+        <div id="modal-reset" class="fixed inset-0 z-[100] bg-gray-900/80 hidden flex items-center justify-center p-4 animate-fade-in">
+            <div class="bg-white rounded-2xl max-w-sm w-full p-8 text-center shadow-2xl border-t-4 border-moe-error">
+                <h3 class="text-2xl font-bold mb-2 text-moe-gray">Lernstand löschen?</h3>
+                <p class="text-sm text-gray-500 mb-8">Möchtest du wirklich alle Fortschritte und Statistiken unwiderruflich löschen?</p>
+                <div class="flex gap-3">
+                    <button onclick="document.getElementById('modal-reset').classList.add('hidden')" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-700 py-3 rounded-xl font-bold transition-colors">Abbrechen</button>
+                    <button onclick="app.confirmReset()" class="flex-1 bg-moe-error hover:bg-red-600 text-white py-3 rounded-xl font-bold transition-colors">Ja, löschen</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODAL: LIGHTNING -->
         <div id="modal-btc" class="fixed inset-0 z-[100] bg-gray-900/90 hidden flex items-center justify-center p-4" onclick="this.classList.add('hidden')">
-            <div class="bg-white rounded-xl max-w-sm w-full p-8 text-center" onclick="event.stopPropagation()">
-                <h3 class="text-xl font-bold mb-4">Lightning Spende</h3>
-                <div class="bg-gray-100 p-4 rounded-lg mb-4 flex justify-center">
+            <div class="bg-white rounded-2xl max-w-sm w-full p-8 text-center shadow-2xl" onclick="event.stopPropagation()">
+                <h3 class="text-xl font-bold mb-4 text-moe-gray">Lightning Spende</h3>
+                <div class="bg-gray-100 p-4 rounded-xl mb-4 flex justify-center">
                     <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=lightning:moeschwarz@blink.sv" alt="Lightning QR" class="w-48 h-48">
                 </div>
-                <p class="text-sm font-bold text-gray-700 break-all mb-4">moeschwarz@blink.sv</p>
-                <button onclick="document.getElementById('modal-btc').classList.add('hidden')" class="w-full bg-fom-gray text-white py-2 rounded font-bold hover:bg-black transition-colors">Schließen</button>
+                <p class="text-sm font-bold text-gray-700 break-all mb-6">moeschwarz@blink.sv</p>
+                <button onclick="document.getElementById('modal-btc').classList.add('hidden')" class="w-full bg-gray-200 text-gray-700 py-3 rounded-xl font-bold hover:bg-gray-300 transition-colors">Schließen</button>
             </div>
         </div>
 
     </main>
 
     <script>
-        /* DATENBANK: 6 SÄULEN (P0-P5), 78 FRAGEN, 65 FLASHCARDS - KOMPLETT UND UNGEKÜRZT */
+        /* DATENBANK: 6 SÄULEN (P0-P5), 76 FRAGEN, 65 FLASHCARDS - KOMPLETT UND UNGEKÜRZT */
         const contentDB = {
             pillars: [
                 {
-                    id: 'P0', title: '0. Einführung in die Vorlesung', desc: 'Social Entrepreneurship und Transferaufgaben.',
+                    id: 'P0', title: '0. Einführung in die Vorlesung', desc: 'Modulziele, Prüfungsformen, Social Entrepreneurship und Literatur.',
                     content: `
                         <h3>Einführung in die Vorlesung</h3>
                         <p>Das Modul "Management Basics im Gesundheitswesen" legt das unverzichtbare betriebswirtschaftliche Fundament für angehende Manager im Gesundheits- und Sozialwesen.</p>
@@ -330,7 +434,13 @@
                         
                         <div class="box-info">
                             <h4>Prüfungsleistung (Die Klausur)</h4>
-                            <p>Besonders wichtig für die Vorbereitung: Etwa <strong>10% des Klausurumfangs</strong> bestehen aus einer <strong>Transferaufgabe</strong>. Bei einer Transferaufgabe wird verlangt, dass das erlernte, theoretische Wissen auf völlig neue, unbekannte Praxis-Sachverhalte (Case Studies) angewendet wird. Pures Auswendiglernen reicht hierfür nicht aus.</p>
+                            <p>Besonders wichtig für die Vorbereitung ist die <strong>Transferaufgabe</strong>. Hierbei reicht reines Auswendiglernen nicht aus; das gelernte Wissen muss auf neue, praxisnahe Sachverhalte (Case Studies) angewendet werden.</p>
+                            <p><strong>Typisches Beispiel für eine Transferaufgabe:</strong><br>
+                            <em>"Beschreiben Sie die Möglichkeiten und die Grenzen des wirtschaftlichen Handelns in der Gefahrenabwehr an einem praktischen Beispiel!"</em></p>
+                            <p><strong>Zentrale Pflichtliteratur:</strong><br>
+                            - Busse, Schreyögg, Stargardt: <em>"Management im Gesundheitswesen: Das Lehrbuch für Studium und Praxis"</em> (Springer Verlag)<br>
+                            - Wasem, Matusiewicz u.a.: <em>"Medizinmanagement: Grundlagen und Praxis"</em> (MWV)<br>
+                            - Wendt, P. U.: <em>"Lehrbuch Soziale Arbeit"</em> (Beltz Juventa)</p>
                         </div>
                     `
                 },
@@ -345,9 +455,9 @@
                             <p>Diese Zusammenhänge müssen für die Klausur sitzen:</p>
                             <ul class="list-none pl-0">
                                 <li class="mb-3"><strong>Umsatz berechnen:</strong><br>
-                                <code class="bg-white px-2 py-1 rounded text-fom-primary font-bold">Umsatz = Menge × Preis</code></li>
+                                <code class="bg-white px-2 py-1 rounded text-moe-primary font-bold">Umsatz = Menge × Preis</code></li>
                                 <li><strong>Gewinn berechnen:</strong><br>
-                                <code class="bg-white px-2 py-1 rounded text-fom-primary font-bold">Gewinn = Umsatzerlöse - Aufwendungen</code><br>
+                                <code class="bg-white px-2 py-1 rounded text-moe-primary font-bold">Gewinn = Umsatzerlöse - Aufwendungen</code><br>
                                 <span class="text-sm text-gray-500">(Wobei Aufwendungen alle Kosten umfassen: Personal, Material, Abschreibungen, Zinsen, Steuern und sonstige Aufwendungen)</span></li>
                             </ul>
                         </div>
@@ -390,7 +500,7 @@
                         <ul>
                             <li><strong>Produktivität (Mengenmäßiges Verhältnis):</strong> <br>
                             Formel: <code>Ausbringungsmenge (Output) / Einsatzmenge (Input)</code>. Sie wird in physikalischen Einheiten (Stück, Stunden, Kilo) gemessen, NICHT in Geld.
-                                <ul class="pl-4 mt-2 border-l-2 border-fom-accent ml-2">
+                                <ul class="pl-4 mt-2 border-l-2 border-moe-accent ml-2">
                                     <li><em>Arbeitsproduktivität:</em> Produzierte Ausbringungsmenge / Eingesetzte Arbeitsstunden.</li>
                                     <li><em>Kapitalproduktivität:</em> Produzierte Ausbringungsmenge / Eingesetztes Sachkapital.</li>
                                 </ul>
@@ -507,10 +617,32 @@
                         <h4>5.2 Organisation & Rechtsformen</h4>
                         <p><strong>Aufbauorganisation:</strong> Wer macht was? (Struktur/Organigramm).<br>
                         <strong>Ablauforganisation:</strong> Wann und wo passiert was? (Prozesse).</p>
-                        <p><strong>Rechtsformen:</strong><br>
-                        - <em>Einzelunternehmen:</em> Gründer gründet allein und haftet voll persönlich.<br>
-                        - <em>Personengesellschaften (GbR, OHG, KG):</em> Haften meist voll, persönlich und unbeschränkt mit ihrem Privatvermögen. <em>Beispiel: Müller Büroschränke KG.</em><br>
-                        - <em>Kapitalgesellschaften (GmbH, AG):</em> Hauptmerkmal ist die <strong>Haftungsbeschränkung</strong>. Wer z.B. allein gründen will und Haftung beschränken möchte, wählt die Ein-Personen-GmbH.</p>
+                        <table class="academic-table">
+                            <tr>
+                                <th>Rechtsform</th>
+                                <th>Gründerzahl</th>
+                                <th>Haftung</th>
+                                <th>Startkapital</th>
+                            </tr>
+                            <tr>
+                                <td><strong>Einzelunternehmen</strong></td>
+                                <td>1 Person</td>
+                                <td>Voll persönlich & unbeschränkt</td>
+                                <td>Kein Minimum</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GbR / OHG</strong> (Personengesellschaften)</td>
+                                <td>Mind. 2 Personen</td>
+                                <td>Gemeinsam, voll persönlich & unbeschränkt</td>
+                                <td>Kein Minimum</td>
+                            </tr>
+                            <tr>
+                                <td><strong>GmbH / AG</strong> (Kapitalgesellschaften)</td>
+                                <td>1 oder mehr</td>
+                                <td>Beschränkt auf das Gesellschaftsvermögen (Haftungsschild)</td>
+                                <td>Zwingend erforderlich (z.B. 25.000€ bei GmbH)</td>
+                            </tr>
+                        </table>
 
                         <h4>5.3 Personal & Führung</h4>
                         <p>Grid-Modell (Blake/Mouton) misst Führungsstile anhand von <strong>Sachorientierung (X)</strong> und <strong>Personenorientierung (Y)</strong>. (z.B. 9/1 = Befehl-Gehorsam, diktatorisch).</p>
@@ -523,8 +655,8 @@
                             <strong>Kombination zur Versorgungsstrategie:</strong><br>
                             Führt man beide Analysen zusammen, ergeben sich klare Handlungsempfehlungen:<br>
                             <ul>
-                                <li><strong>XA-Güter (Hoher Wert, konstanter Verbrauch):</strong> Hier lohnt sich hoher Planungsaufwand! Strategie: <em>Bedarfsorientierte Beschaffung (Just-in-Time)</em>. Keine großen Lagerbestände aufbauen, um Kapitalbindung zu minimieren.</li>
-                                <li><strong>CZ-Güter (Geringer Wert, chaotischer Verbrauch):</strong> Ein hoher Planungsaufwand wäre hier reine Geldverschwendung. Strategie: <em>Fallweise Beschaffung</em> (erst kaufen, wenn es akut gebraucht wird) oder <em>Vorratsbeschaffung</em>, um nicht ständig neu bestellen zu müssen.</li>
+                                <li><strong>XA-Güter (Hoher Wert, konstanter Verbrauch):</strong> Hier lohnt sich hoher Planungsaufwand! Strategie: <em>Bedarfsgerechte Beschaffung (Just-in-Time)</em>. Keine großen Lagerbestände aufbauen, um Kapitalbindung zu minimieren.</li>
+                                <li><strong>CZ-Güter (Geringer Wert, chaotischer Bedarf):</strong> Ein hoher Planungsaufwand wäre hier reine Geldverschwendung. Strategie: <em>Fallweise Beschaffung</em> (erst kaufen, wenn es akut gebraucht wird) oder <em>Vorratsbeschaffung</em>, um nicht ständig neu bestellen zu müssen.</li>
                             </ul>
                         </div>
 
@@ -543,13 +675,17 @@
                 }
             ],
             flashcards: [
+                { front: 'Transferaufgabe (Klausur)', back: 'Praktische Anwendung der Theorie.\n\nBeispiel: "Beschreiben Sie die Möglichkeiten und Grenzen des wirtschaftlichen Handelns in der Gefahrenabwehr an einem praktischen Beispiel!"' },
                 { front: 'Umsatz (Formel)', back: 'Absatzmenge × Preis' },
                 { front: 'Gewinn (Formel)', back: 'Umsatzerlöse abzüglich aller Aufwendungen (Personal, Material, Abschreibungen, Zinsen, Steuern)' },
                 { front: 'Effektivität vs. Effizienz', back: 'Effektivität: Zielerreichung (Die richtigen Dinge tun). Effizienz: Wirtschaftlichkeit (Die Dinge richtig tun).' },
-                { front: 'Wirtschaftlichkeitsgebot (GKV)', back: '§12 SGB V: Leistungen müssen ausreichend, zweckmäßig und wirtschaftlich sein.' },
+                { front: 'Wirtschaftlichkeitsgebot (GKV)', back: '§12 SGB V: Leistungen müssen ausreichend, zweckmäßig und wirtschaftlich sein; sie dürfen das Maß des Notwendigen nicht überschreiten.' },
                 { front: 'Produktivität vs. Wirtschaftlichkeit', back: 'Produktivität = Output / Input (Mengenmäßig). Wirtschaftlichkeit = Ertrag / Aufwand (Wertmäßig, in Euro).' },
+                { front: 'Arbeitsproduktivität (Formel)', back: 'Ausbringungsmenge geteilt durch eingesetzte Arbeitsstunden.' },
+                { front: 'Kapitalproduktivität (Formel)', back: 'Ausbringungsmenge geteilt durch eingesetztes Sachkapital.' },
                 { front: 'Originäre Produktionsfaktoren', back: 'Die "Basis": Elementarfaktoren (Arbeit, Maschine, Material) PLUS die Unternehmensleitung!' },
                 { front: 'Derivative Produktionsfaktoren', back: 'Die "abgeleiteten" Faktoren: Nur Planung, Organisation und Kontrolle.' },
+                { front: 'Dispositive Faktoren', back: 'Die Leitung (originär) + Planung, Organisation, Kontrolle (derivativ).' },
                 { front: 'Spannungsverhältnis: Krise vs. Katastrophe', back: 'Eine Krise darf nicht zur Katastrophe werden. Eine externe Katastrophe darf nicht zur permanenten Unternehmenskrise führen.' },
                 { front: 'Dienstleistung: Intangibilität', back: 'DL sind ein intangibles (immaterielles) Gut, nicht greifbar und nicht auf Vorrat lagerfähig.' },
                 { front: 'Dienstleistung: Leistungsbereitschaft', back: 'Anbieter muss Leistung ständig vorhalten (Vorhaltekosten), auch wenn kein Kunde da ist.' },
@@ -560,20 +696,20 @@
                 { front: 'Aufbau- vs. Ablauforganisation', back: 'Aufbau: Wer macht was? (Struktur/Organigramm). Ablauf: Wann und wo geschieht etwas? (Prozesse).' },
                 { front: 'Personengesellschaften (Beispiele)', back: 'GbR, OHG, KG. Gesellschafter haften meist voll, unbeschränkt und mit Privatvermögen.' },
                 { front: 'Kapitalgesellschaften (Beispiele)', back: 'GmbH, UG, AG. Hauptmerkmal: Haftungsbeschränkung auf das Gesellschaftsvermögen. Stammkapital nötig.' },
+                { front: 'ABC-Analyse', back: 'Klassifiziert Material nach Wert/Menge. A-Güter: Nur ca. 15% der Menge, binden aber ~80% des Kapital-Wertes!' },
+                { front: 'XYZ-Analyse', back: 'Klassifiziert nach Vorhersagbarkeit. X = konstanter Verbrauch, Y = Trend/Saisonal, Z = völlig unregelmäßig/chaotisch.' },
+                { front: 'Beschaffungsstrategie XA-Güter', back: 'Bedarfsorientierte Beschaffung (Just-in-Time). Hoher Wert = wenig lagern; Konstanter Verbrauch = perfekt planbar.' },
+                { front: 'Beschaffungsstrategie CZ-Güter', back: 'Fallweise Beschaffung oder Vorratsbeschaffung. Aufwendige Planung lohnt sich beim geringen Wert nicht.' },
                 { front: 'Marketing-Mix (4 P\'s)', back: 'Product (Produkt), Price (Preis), Place (Vertrieb), Promotion (Kommunikation).' },
                 { front: 'Statische Investitionsrechenverfahren', back: 'Rechnen mit Durchschnittswerten ohne Zinseszins: Kostenvergleich, Gewinnvergleich, Rentabilität, Amortisation.' },
                 { front: 'Dynamische Investitionsrechenverfahren', back: 'Berücksichtigen den zeitlichen Anfall von Zahlungen (mit Abzinsung): z.B. Kapitalwertmethode.' },
                 { front: 'Porter\'s Five Forces', back: '1. Neue Anbieter, 2. Rivalität, 3. Substitute, 4. Lieferanten, 5. Abnehmer. (Shareholder gehören NICHT dazu!).' },
-                { front: 'Transferaufgabe (Klausur)', back: 'Macht ca. 10% der Klausur aus. Theoretisches Wissen muss auf neue, unbekannte Praxis-Fälle angewendet werden.' },
                 { front: 'Social Entrepreneurship', back: 'Unternehmerisches Handeln, das primär auf die Lösung gesellschaftlicher/sozialer Probleme ausgerichtet ist (nicht rein auf Profitmaximierung).' },
                 { front: 'Zielkonflikt des Wirtschaftens', back: 'Unbegrenzte menschliche Bedürfnisse vs. streng knappe Güter/Ressourcen.' },
                 { front: 'VWL vs. BWL', back: 'VWL: Makro-Ebene (gesamte Wirtschaft). BWL: Mikro-Ebene (das einzelne Unternehmen und seine internen Prozesse).' },
                 { front: 'Betrieb vs. Unternehmen', back: 'Betrieb: Technisch-organisatorische Einheit (Produktion). Unternehmen: Wirtschaftlich-rechtliche Einheit (oft mit Gewinnerzielungsabsicht).' },
-                { front: 'Arbeitsproduktivität (Formel)', back: 'Ausbringungsmenge geteilt durch eingesetzte Arbeitsstunden.' },
-                { front: 'Kapitalproduktivität (Formel)', back: 'Ausbringungsmenge geteilt durch eingesetztes Sachkapital.' },
                 { front: 'Minimalprinzip', back: 'Ein gegebenes (fixes) Ziel soll mit minimalen Mitteln erreicht werden.' },
                 { front: 'Maximalprinzip', back: 'Mit gegebenen (fixen) Mitteln soll ein maximales Ziel erreicht werden.' },
-                { front: 'Dispositive Faktoren (Gutenberg)', back: 'Die Leitung (originär) + Planung, Organisation, Kontrolle (derivativ).' },
                 { front: 'Institutionelles Management', back: 'Betrachtet die Personen mit Vorgesetztenfunktion (das Organigramm / die Hierarchie).' },
                 { front: 'Funktionales Management', back: 'Betrachtet die Aufgaben der Steuerung: Zielsetzung, Planung, Organisation, Führung, Kontrolle (Z-P-O-F-K).' },
                 { front: 'Meritorische Güter', back: 'Gesellschaftlich notwendige Güter (z.B. Notarzt), bei denen der freie Markt oft versagt, weil sie unrentabel sind. Der Staat greift ein.' },
@@ -595,15 +731,11 @@
                 { front: 'Grid-Modell (Blake/Mouton)', back: 'Ein Führungsverhaltensgitter. Misst auf der X-Achse die Sachorientierung (Output) und auf der Y-Achse die Personenorientierung.' },
                 { front: 'Grid 9/1 (Befehl-Gehorsam)', back: 'Maximaler Fokus auf Output (9), minimaler Fokus auf Menschen (1). Diktatorischer Führungsstil.' },
                 { front: 'Grid 1/9 (Glacéhandschuh)', back: 'Maximaler Fokus auf Menschen (9), minimal auf Output (1). Fokus auf Harmonie und Wohlfühlatmosphäre.' },
-                { front: 'Grid 9/9 (Team-Management)', back: 'Hohe Sach- und Personenorientierung. Das theoretische Idealbild.' },
-                { front: 'ABC-Analyse', back: 'Klassifiziert Material nach Wert/Menge. A-Güter: Nur ca. 15% der Menge, binden aber ~80% des Kapital-Wertes!' },
-                { front: 'XYZ-Analyse', back: 'Klassifiziert nach Vorhersagbarkeit. X = konstanter Verbrauch, Y = Trend/Saisonal, Z = völlig unregelmäßig/chaotisch.' },
-                { front: 'Beschaffungsstrategie XA-Güter', back: 'Bedarfsorientierte Beschaffung (Just-in-Time). Hoher Wert = wenig lagern; Konstanter Verbrauch = perfekt planbar.' },
-                { front: 'Beschaffungsstrategie CZ-Güter', back: 'Fallweise Beschaffung oder Vorratsbeschaffung. Aufwendige Planung lohnt sich beim geringen Wert nicht.' }
+                { front: 'Grid 9/9 (Team-Management)', back: 'Hohe Sach- und Personenorientierung. Das theoretische Idealbild.' }
             ],
             questions: [
                 // --- P0: EINFÜHRUNG (4 Fragen) ---
-                { id: 'q0_1', cat: 'P0', q: "Welcher Anteil der Klausur besteht voraussichtlich aus einer Transferaufgabe?", o: ["0%", "Etwa 10%", "50%", "100%"], c: 1, expl: "10% erfordern den Transfer von Wissen auf neue Praxis-Fälle.", memo: "10% Transfer." },
+                { id: 'q0_1', cat: 'P0', q: "Welches ist ein typisches Szenario für eine Transferaufgabe in der Klausur?", o: ["Reines Aufzählen von Fachbegriffen", "Das exakte Auswendiglernen von Jahreszahlen", "Beschreiben der Möglichkeiten und Grenzen wirtschaftlichen Handelns in der Gefahrenabwehr an einem praktischen Beispiel", "Ausschließlich Multiple-Choice-Kreuzchen setzen"], c: 2, expl: "Transferaufgaben verlangen, dass man die gelernte Theorie auf ein konkretes, praktisches Beispiel aus dem Gesundheitswesen anwendet.", memo: "Theorie auf Praxisbeispiel anwenden." },
                 { id: 'q0_2', cat: 'P0', q: "Was bedeutet 'Social Entrepreneurship' im Kontext der Modulziele?", o: ["Unternehmerisches Handeln, das primär zur Lösung sozialer Probleme genutzt wird", "Das reine Sammeln von Spendengeldern durch ehrenamtliche Mitarbeiter unter Verzicht auf jegliche betriebswirtschaftliche Struktur", "Ein rein kapitalistischer Ansatz, der ausschließlich auf die Maximierung der Aktionärsrenditen im Pflegesektor abzielt", "Die alleinige Organisation von karitativen Feiern ohne wirtschaftliche Absicht"], c: 0, isStar: true, expl: "Achtung: Die kurze Antwort ist richtig! Es verbindet Unternehmertum mit gesellschaftlichem Mehrwert.", memo: "Sozial + Unternehmer." },
                 { id: 'q0_3', cat: 'P0', q: "Die methodische Erstellung wovon soll laut den Modulzielen am Ende des Kurses beschrieben werden können?", o: ["Dienstplänen für die Pflege", "Businessplänen", "Operativen Notfallplänen der Feuerwehr", "Jahresabschlüssen nach HGB"], c: 1, expl: "Die Erstellung von Businessplänen ist ein explizites Lernziel.", memo: "Der Plan fürs Business." },
                 { id: 'q0_4', cat: 'P0', q: "Was bedeutet es, eine 'Transferaufgabe' in der Prüfung zu lösen?", o: ["Texte 1:1 aus dem Skript auswendig aufschreiben", "Gelerntes theoretisches Wissen auf neue, unbekannte Praxis-Sachverhalte anwenden", "Einen medizinischen Text ins Englische übersetzen", "Ausschließlich Multiple-Choice Fragen durch Ausschlussverfahren beantworten"], c: 1, isStar: true, expl: "Transfer verlangt echtes Verstehen statt nur Auswendiglernen.", memo: "Wissen anwenden = Transfer." },
@@ -694,12 +826,12 @@
 
         const app = {
             state: {
-                store: JSON.parse(localStorage.getItem('fom_v19_final_exam')) || { modules: {}, masterScore: 0 },
+                store: JSON.parse(localStorage.getItem('moe_store_v5_final')) || { modules: {}, masterScore: 0 },
                 session: { mode: null, qs: [], idx: 0, corrects: 0, lastChoice: null },
                 fc: { idx: 0, flipped: false }
             },
             init: function() { this.renderDashboard(); this.renderLearnMenu(); },
-            save: function() { localStorage.setItem('fom_v19_final_exam', JSON.stringify(this.state.store)); },
+            save: function() { localStorage.setItem('moe_store_v5_final', JSON.stringify(this.state.store)); },
             
             renderDashboard: function() {
                 this.renderCircle('dash-master-prog', 'dash-master-text', this.state.store.masterScore, 40);
@@ -713,12 +845,12 @@
                     let correct = 0;
                     Object.keys(mod.ans).forEach(qid => { const q = contentDB.questions.find(x => x.id === qid); if(q && mod.ans[qid] === q.c) correct++; });
                     const pct = total === 0 ? 0 : Math.round((correct / total) * 100);
-                    const color = pct >= 80 ? '#00665E' : (pct >= 50 ? '#D4AF37' : '#C62828');
+                    const color = pct >= 80 ? '#F97316' : (pct >= 50 ? '#D97706' : '#EF4444');
                     
                     return `<div onclick="app.checkQuizStart('${p.id}')" class="bg-white rounded-xl p-6 shadow-sm hover:shadow-xl cursor-pointer border border-gray-100 flex flex-col justify-between h-full group transition-all duration-300 transform hover:-translate-y-1">
                         <div>
                             <div class="flex justify-between items-start mb-4">
-                                <h3 class="text-xl font-bold text-gray-800 group-hover:text-fom-primary transition-colors pr-2 leading-tight">${p.title}</h3>
+                                <h3 class="text-xl font-bold text-gray-800 group-hover:text-moe-primary transition-colors pr-2 leading-tight">${p.title}</h3>
                                 <div class="relative w-12 h-12 flex-shrink-0">
                                     <svg class="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
                                         <circle cx="50" cy="50" r="40" fill="none" stroke="#F3F4F6" stroke-width="8" />
@@ -737,7 +869,7 @@
             renderCircle: function(id, tid, pct, r) {
                 const el = document.getElementById(id); const circ = 2 * Math.PI * r;
                 el.style.strokeDasharray = circ; el.style.strokeDashoffset = circ - (pct/100)*circ;
-                el.style.stroke = pct >= 80 ? '#00665E' : (pct >= 50 ? '#D4AF37' : '#C62828');
+                el.style.stroke = pct >= 80 ? '#F97316' : (pct >= 50 ? '#D97706' : '#EF4444');
                 document.getElementById(tid).innerText = pct + '%';
             },
 
@@ -745,20 +877,40 @@
                 this.state.session.mode = id;
                 const all = contentDB.questions.filter(q => q.cat === id || id === 'all');
                 const mod = this.state.store.modules[id];
-                if (mod && id !== 'all') {
+                
+                if (id === 'all') {
+                    this.startQuiz('all', [...contentDB.questions].sort(()=>0.5-Math.random()).slice(0, 50));
+                    return;
+                }
+
+                if (mod) {
                     const wrong = all.filter(q => mod.ans[q.id] === undefined || mod.ans[q.id] !== q.c);
-                    if (wrong.length > 0 && wrong.length < all.length) { this.pendingWrong = wrong; this.pendingAll = all; document.getElementById('modal-retry').classList.remove('hidden'); return; }
+                    if (wrong.length === 0) {
+                        this.pendingModuleId = id;
+                        this.pendingAllQs = all;
+                        document.getElementById('modal-perfect').classList.remove('hidden');
+                        return;
+                    } else if (wrong.length < all.length) {
+                        this.pendingModuleId = id;
+                        this.pendingWrong = wrong;
+                        this.pendingAll = all; 
+                        document.getElementById('modal-retry').classList.remove('hidden'); 
+                        return;
+                    }
                 }
                 
-                let finalQuestions = all;
-                if(id === 'all') {
-                    finalQuestions = [...contentDB.questions].sort(()=>0.5-Math.random()).slice(0, 50);
-                }
-                this.startQuiz(id, finalQuestions);
+                this.startQuiz(id, all);
             },
 
             startQuizMode: function(m) {
                 document.getElementById('modal-retry').classList.add('hidden');
+                document.getElementById('modal-perfect').classList.add('hidden');
+                
+                if (m === 'reset') {
+                    this.state.store.modules[this.state.session.mode] = { ans: {} };
+                    this.save();
+                }
+                
                 this.startQuiz(this.state.session.mode, m === 'retry' ? this.pendingWrong : this.pendingAll);
             },
 
@@ -778,8 +930,8 @@
                 document.getElementById('progress-bar').style.width = (this.state.session.idx / this.state.session.qs.length * 100) + '%';
                 
                 const cont = document.getElementById('options-container');
-                cont.innerHTML = q.o.map((opt, i) => `<button onclick="app.handleAnswer(${i})" class="w-full text-left p-5 rounded-xl border-2 border-gray-200 hover:border-fom-primary transition-all font-medium flex items-center group bg-white shadow-sm text-lg">
-                    <span class="w-8 h-8 rounded bg-gray-100 mr-4 flex items-center justify-center font-bold text-gray-400 group-hover:bg-white border group-hover:border-fom-primary shrink-0">${String.fromCharCode(65+i)}</span><span class="text-gray-700">${opt}</span></button>`).join('');
+                cont.innerHTML = q.o.map((opt, i) => `<button onclick="app.handleAnswer(${i})" class="w-full text-left p-5 rounded-xl border-2 border-gray-200 hover:border-moe-primary transition-all font-medium flex items-center group bg-white shadow-sm text-lg">
+                    <span class="w-8 h-8 rounded bg-gray-100 mr-4 flex items-center justify-center font-bold text-gray-400 group-hover:bg-white border group-hover:border-moe-primary shrink-0">${String.fromCharCode(65+i)}</span><span class="text-gray-700">${opt}</span></button>`).join('');
                 
                 document.getElementById('feedback-layer').classList.add('hidden');
                 document.getElementById('ai-explain-box').classList.add('hidden');
@@ -799,10 +951,10 @@
                     btns[i].disabled = true; 
                     btns[i].className = "w-full text-left p-5 rounded-xl border-2 font-medium flex items-center shadow-sm text-lg";
                     if(i === q.c) {
-                        btns[i].classList.add('bg-green-50', 'border-fom-primary', 'text-fom-primary');
+                        btns[i].classList.add('bg-orange-50', 'border-moe-primary', 'text-moe-primary');
                         btns[i].innerHTML = `<span class="mr-4 text-2xl">✅</span> <span>${q.o[i]}</span>`;
                     } else if(i === c && !isC) {
-                        btns[i].classList.add('bg-red-50', 'border-fom-error', 'text-fom-error');
+                        btns[i].classList.add('bg-red-50', 'border-moe-error', 'text-moe-error');
                         btns[i].innerHTML = `<span class="mr-4 text-2xl">❌</span> <span>${q.o[i]}</span>`;
                     } else {
                         btns[i].classList.add('bg-gray-50', 'border-gray-100', 'text-gray-400', 'opacity-50');
@@ -812,9 +964,9 @@
                 
                 const fl = document.getElementById('feedback-layer'); fl.classList.remove('hidden');
                 document.getElementById('fb-icon').innerText = isC ? '✓' : '✕';
-                document.getElementById('fb-icon').className = "w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white " + (isC ? 'bg-fom-primary' : 'bg-fom-error');
+                document.getElementById('fb-icon').className = "w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white " + (isC ? 'bg-moe-primary' : 'bg-moe-error');
                 document.getElementById('fb-title').innerText = isC ? 'Exzellent!' : 'Leider falsch';
-                document.getElementById('fb-title').className = "font-bold text-2xl mb-1 " + (isC ? 'text-fom-primary' : 'text-fom-error');
+                document.getElementById('fb-title').className = "font-bold text-2xl mb-1 " + (isC ? 'text-moe-primary' : 'text-moe-error');
                 document.getElementById('fb-text').innerHTML = q.expl; 
                 document.getElementById('fb-memo').innerText = q.memo;
                 
@@ -841,21 +993,56 @@
                 this.switchView('view-results'); this.renderDashboard();
             },
 
-            renderLearnMenu: function() { document.getElementById('learn-menu').innerHTML = contentDB.pillars.map(p => `<button onclick="app.loadLearn('${p.id}')" class="w-full text-left p-4 rounded-xl bg-white border border-gray-200 transition-all font-bold flex items-center gap-3 mb-2 shadow-sm group hover:border-fom-primary text-gray-700"><span class="w-2 h-2 rounded-full bg-fom-primary group-hover:scale-150 transition-transform"></span><span>${p.title}</span></button>`).join(''); },
+            renderLearnMenu: function() { document.getElementById('learn-menu').innerHTML = contentDB.pillars.map(p => `<button onclick="app.loadLearn('${p.id}')" class="w-full text-left p-4 rounded-xl bg-white border border-gray-200 transition-all font-bold flex items-center gap-3 mb-2 shadow-sm group hover:border-moe-primary text-gray-700"><span class="w-2 h-2 rounded-full bg-moe-primary group-hover:scale-150 transition-transform"></span><span>${p.title}</span></button>`).join(''); },
             loadLearn: function(id) { 
                 const p = contentDB.pillars.find(x => x.id === id); this.state.session.hubId = id; document.getElementById('learn-placeholder').classList.add('hidden');
                 document.getElementById('learn-content-scroll-area').classList.remove('hidden');
                 
                 const hasQuestions = contentDB.questions.some(q => q.cat === id);
-                const quizBtnHTML = hasQuestions ? `<div class="mt-12 flex justify-end border-t border-gray-200 pt-6"><button onclick="app.checkQuizStart('${id}')" class="bg-fom-primary hover:bg-fom-dark text-white px-8 py-4 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-1">Modul-Quiz starten ❯</button></div>` : '';
+                const quizBtnHTML = hasQuestions ? `<div class="mt-12 flex justify-end border-t border-gray-200 pt-6"><button onclick="app.checkQuizStart('${id}')" class="bg-moe-primary hover:bg-moe-dark text-white px-8 py-4 rounded-xl font-bold shadow-lg transition-all transform hover:-translate-y-1">Modul-Quiz starten ❯</button></div>` : '';
 
-                document.getElementById('learn-content').innerHTML = `<h2 class="text-3xl font-bold text-fom-primary mb-4">${p.title}</h2><p class="text-gray-500 mb-8 border-b border-gray-200 pb-4">${p.desc}</p>${p.content}${quizBtnHTML}`;
+                document.getElementById('learn-content').innerHTML = `<h2 class="text-3xl font-bold text-moe-primary mb-4">${p.title}</h2><p class="text-gray-500 mb-8 border-b border-gray-200 pb-4">${p.desc}</p>${p.content}${quizBtnHTML}`;
                 document.getElementById('ai-answer-box').classList.add('hidden'); document.getElementById('ai-question-input').value = "";
             },
 
-            switchView: function(id) { ['view-dashboard', 'view-quiz', 'view-learning', 'view-results', 'view-flashcards'].forEach(v => document.getElementById(v).classList.toggle('hidden', v !== id)); window.scrollTo(0,0); if(id==='view-flashcards') this.nextFlashcard(0); },
-            goHome: function() { if(!document.getElementById('view-quiz').classList.contains('hidden') && !confirm("Fortschritt wird erst bei Modul-Abschluss gespeichert. Wirklich abbrechen?")) return; this.switchView('view-dashboard'); },
-            resetData: function() { if(confirm("Möchtest du deinen kompletten Lernstand löschen?")) { localStorage.removeItem('fom_v19_final_exam'); location.reload(); }},
+            switchView: function(viewId) { 
+                const views = ['view-dashboard', 'view-quiz', 'view-results', 'view-learning', 'view-flashcards'];
+                views.forEach(id => {
+                    const el = document.getElementById(id);
+                    if(el) {
+                        if(id === viewId) el.classList.remove('hidden');
+                        else el.classList.add('hidden');
+                    }
+                });
+                window.scrollTo(0,0);
+                if(viewId === 'view-flashcards') this.nextFlashcard(0);
+            },
+            
+            // Fixed goHome logic (Safe for Canvas IFrames)
+            goHome: function() { 
+                const quizView = document.getElementById('view-quiz');
+                if(quizView && !quizView.classList.contains('hidden')) {
+                    document.getElementById('modal-abort').classList.remove('hidden');
+                } else {
+                    app.switchView('view-dashboard');
+                }
+            },
+            
+            confirmAbort: function() {
+                document.getElementById('modal-abort').classList.add('hidden');
+                app.switchView('view-dashboard');
+            },
+
+            // Fixed Reset logic (Safe for Canvas IFrames)
+            resetData: function() {
+                document.getElementById('modal-reset').classList.remove('hidden');
+            },
+            
+            confirmReset: function() {
+                localStorage.removeItem('moe_store_v5_final'); 
+                location.reload(); 
+            },
+
             flipFlashcard: function() { this.state.fc.flipped = !this.state.fc.flipped; document.getElementById('flashcard-inner').classList.toggle('rotate-y-180', this.state.fc.flipped); },
             nextFlashcard: function(d) { 
                 this.state.fc.idx = (this.state.fc.idx+d+contentDB.flashcards.length)%contentDB.flashcards.length; 
@@ -875,14 +1062,14 @@
             askAIInHub: async function() {
                 const i = document.getElementById('ai-question-input'); const b = document.getElementById('ai-ask-btn'); const box = document.getElementById('ai-answer-box');
                 const qText = i.value.trim(); if(!qText) return;
-                i.disabled = b.disabled = true; b.innerText = "Denkt..."; box.classList.remove('hidden'); box.innerHTML = "<span class='animate-pulse text-fom-primary font-bold'>Der Tutor analysiert das Skript...</span>";
+                i.disabled = b.disabled = true; b.innerText = "Denkt..."; box.classList.remove('hidden'); box.innerHTML = "<span class='animate-pulse text-moe-primary font-bold'>Der Tutor analysiert das Skript...</span>";
                 const p = contentDB.pillars.find(x => x.id === this.state.session.hubId);
                 const ans = await this.callAI(`Du bist akademischer Tutor für BWL. Antworte basierend auf dem Skript: ${p ? p.content : 'BWL'}\nFrage des Studenten: ${qText}`);
                 box.innerHTML = ans; i.value = ""; i.disabled = b.disabled = false; b.innerText = "Anfragen";
             },
             explainWithAI: async function() {
                 const q = this.state.session.qs[this.state.session.idx]; const box = document.getElementById('ai-explain-box'); const btn = document.getElementById('ai-explain-btn');
-                btn.disabled = true; btn.innerHTML = "✨ KI generiert Erklärung..."; box.classList.remove('hidden'); box.innerHTML = "<span class='animate-pulse text-fom-primary'>Einen Moment bitte...</span>";
+                btn.disabled = true; btn.innerHTML = "✨ KI generiert Erklärung..."; box.classList.remove('hidden'); box.innerHTML = "<span class='animate-pulse text-moe-primary'>Einen Moment bitte...</span>";
                 const userAns = q.o[this.state.session.lastChoice]; const correctAns = q.o[q.c];
                 const ans = await this.callAI(`Student hat MC-Frage beantwortet.\nFrage: ${q.q}\nStudenten-Antwort: ${userAns}\nKorrekte Antwort: ${correctAns}\nKurze Erklärung im Skript: ${q.expl}\nErkläre kurz, motivierend und verständlich warum die Antwort falsch/richtig ist (max 4 Sätze). Sprich den Studenten direkt an.`);
                 box.innerHTML = ans; btn.innerHTML = "✨ KI-Erklärung abgeschlossen";
