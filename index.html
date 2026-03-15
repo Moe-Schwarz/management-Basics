@@ -296,7 +296,12 @@
                         </div>
                     </div>
                 </div>
-                <div class="bg-gray-50 px-8 py-5 border-t border-gray-200 flex justify-end">
+                <div class="bg-gray-50 px-8 py-5 border-t border-gray-200 flex items-center justify-between gap-3">
+                    <div id="nav-module-btns" class="hidden flex gap-2">
+                        <button id="btn-prev" onclick="app.prevQuestion()" class="border border-gray-300 text-gray-500 hover:text-moe-primary hover:border-moe-primary font-bold py-3 px-6 rounded shadow-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed">❮ Zurück</button>
+                        <button id="btn-skip" onclick="app.skipQuestion()" class="border border-gray-300 text-gray-500 hover:text-moe-primary hover:border-moe-primary font-bold py-3 px-6 rounded shadow-sm transition-all disabled:opacity-30 disabled:cursor-not-allowed">Überspringen ❯</button>
+                    </div>
+                    <div class="flex-1"></div>
                     <button id="btn-next" onclick="app.nextQuestion()" class="bg-moe-primary hover:bg-moe-dark text-white font-bold py-3 px-10 rounded shadow transition-all disabled:opacity-50 disabled:cursor-not-allowed">Weiter ❯</button>
                 </div>
             </div>
@@ -927,7 +932,8 @@
         const app = {
             state: {
                 store: JSON.parse(localStorage.getItem('moe_store_v5_final')) || { modules: {}, masterScore: 0 },
-                session: { mode: null, qs: [], idx: 0, corrects: 0, lastChoice: null, answered: false /* BUG FIX #4: proper answered flag */ },
+                session: { mode: null, qs: [], idx: 0, corrects: 0, lastChoice: null, answered: false, /* BUG FIX #4: proper answered flag */
+                    answers: {} /* Track per-question answers for navigation: { qIndex: chosenOptionIndex } */ },
                 fc: { idx: 0, flipped: false }
             },
             init: function() {
@@ -1040,35 +1046,111 @@
                 this.state.session.idx = 0;
                 this.state.session.corrects = 0;
                 this.state.session.answered = false; /* BUG FIX #4 */
+                this.state.session.answers = {}; /* Reset per-question answer tracking */
                 this.switchView('view-quiz');
                 this.renderQuestion();
             },
 
+            /* Helper: Is the current quiz the master exam? */
+            isMasterQuiz: function() {
+                return this.state.session.mode === 'all';
+            },
+
             renderQuestion: function() {
-                const q = this.state.session.qs[this.state.session.idx];
-                /* BUG FIX #4: Reset answered flag for new question */
-                this.state.session.answered = false;
+                const idx = this.state.session.idx;
+                const q = this.state.session.qs[idx];
+                const isMaster = this.isMasterQuiz();
+                const prevAnswer = this.state.session.answers[idx];
+                const wasAnswered = prevAnswer !== undefined;
+
+                /* Set answered flag: true if already answered before, false if fresh */
+                this.state.session.answered = wasAnswered;
                 
-                document.getElementById('q-index').innerText = this.state.session.idx + 1;
-                document.getElementById('q-current').innerText = this.state.session.idx + 1;
+                document.getElementById('q-index').innerText = idx + 1;
+                document.getElementById('q-current').innerText = idx + 1;
                 document.getElementById('q-total').innerText = this.state.session.qs.length;
-                /* OPT #5: Use sanitize for plain text question content */
                 document.getElementById('q-text').innerText = q.q;
                 
                 const pillar = contentDB.pillars.find(p => p.id === q.cat);
                 document.getElementById('q-cat-label').innerText = pillar ? pillar.title : 'Master-Klausur';
                 
                 document.getElementById('star-badge').style.display = q.isStar ? 'block' : 'none';
-                document.getElementById('progress-bar').style.width = (this.state.session.idx / this.state.session.qs.length * 100) + '%';
+
+                /* Progress bar: in module quizzes = % of correctly answered questions;
+                   in master quiz = sequential progress (original behavior) */
+                if (isMaster) {
+                    document.getElementById('progress-bar').style.width = (idx / this.state.session.qs.length * 100) + '%';
+                } else {
+                    const totalQs = this.state.session.qs.length;
+                    let correctCount = 0;
+                    for (const k in this.state.session.answers) {
+                        const ai = parseInt(k);
+                        if (this.state.session.answers[k] === this.state.session.qs[ai].c) correctCount++;
+                    }
+                    document.getElementById('progress-bar').style.width = (correctCount / totalQs * 100) + '%';
+                }
+
+                /* Show/hide module navigation buttons */
+                const navBtns = document.getElementById('nav-module-btns');
+                if (isMaster) {
+                    navBtns.classList.add('hidden');
+                    navBtns.classList.remove('flex');
+                } else {
+                    navBtns.classList.remove('hidden');
+                    navBtns.classList.add('flex');
+                    document.getElementById('btn-prev').disabled = (idx === 0);
+                    document.getElementById('btn-skip').disabled = (idx === this.state.session.qs.length - 1);
+                }
                 
                 const cont = document.getElementById('options-container');
-                /* OPT #5: Use sanitize for option text */
-                cont.innerHTML = q.o.map((opt, i) => `<button onclick="app.handleAnswer(${i})" class="w-full text-left p-5 rounded-xl border-2 border-gray-200 hover:border-moe-primary transition-all font-medium flex items-center group bg-white shadow-sm text-lg">
-                    <span class="w-8 h-8 rounded bg-gray-100 mr-4 flex items-center justify-center font-bold text-gray-400 group-hover:bg-white border group-hover:border-moe-primary shrink-0">${String.fromCharCode(65+i)}</span><span class="text-gray-700">${sanitize(opt)}</span></button>`).join('');
-                
-                document.getElementById('feedback-layer').classList.add('hidden');
-                document.getElementById('ai-explain-box').classList.add('hidden');
-                document.getElementById('btn-next').disabled = true;
+
+                /* If this question was previously answered, restore the answered state */
+                if (wasAnswered) {
+                    const c = prevAnswer;
+                    const isC = c === q.c;
+                    cont.innerHTML = q.o.map((opt, i) => {
+                        let cls, inner;
+                        if (i === q.c) {
+                            cls = 'bg-orange-50 border-moe-primary text-moe-primary';
+                            inner = `<span class="mr-4 text-2xl">✅</span> <span>${sanitize(opt)}</span>`;
+                        } else if (i === c && !isC) {
+                            cls = 'bg-red-50 border-moe-error text-moe-error';
+                            inner = `<span class="mr-4 text-2xl">❌</span> <span>${sanitize(opt)}</span>`;
+                        } else {
+                            cls = 'bg-gray-50 border-gray-100 text-gray-400 opacity-50';
+                            inner = `<span class="mr-4 opacity-0">⬜</span> <span>${sanitize(opt)}</span>`;
+                        }
+                        return `<button disabled class="w-full text-left p-5 rounded-xl border-2 font-medium flex items-center shadow-sm text-lg ${cls}">${inner}</button>`;
+                    }).join('');
+
+                    /* Show feedback layer with stored data */
+                    const fl = document.getElementById('feedback-layer'); fl.classList.remove('hidden');
+                    document.getElementById('fb-icon').innerText = isC ? '✓' : '✕';
+                    document.getElementById('fb-icon').className = 'w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white ' + (isC ? 'bg-moe-primary' : 'bg-moe-error');
+                    document.getElementById('fb-title').innerText = isC ? 'Exzellent!' : 'Leider falsch';
+                    document.getElementById('fb-title').className = 'font-bold text-2xl mb-1 ' + (isC ? 'text-moe-primary' : 'text-moe-error');
+                    document.getElementById('fb-text').innerHTML = q.expl;
+                    document.getElementById('fb-memo').innerText = q.memo;
+                    document.getElementById('ai-explain-box').classList.add('hidden');
+                    const aiBtn = document.getElementById('ai-explain-btn');
+                    aiBtn.innerHTML = '✨ Lass dir das genauer von der KI erkl\u00e4ren'; aiBtn.disabled = false;
+
+                    /* btn-next: enabled, show appropriate text */
+                    const next = document.getElementById('btn-next');
+                    next.disabled = false;
+                    next.innerText = (idx === this.state.session.qs.length - 1) ? 'Pr\u00fcfung beenden' : 'N\u00e4chste Frage \u276f';
+                } else {
+                    /* Fresh, unanswered question */
+                    cont.innerHTML = q.o.map((opt, i) => `<button onclick="app.handleAnswer(${i})" class="w-full text-left p-5 rounded-xl border-2 border-gray-200 hover:border-moe-primary transition-all font-medium flex items-center group bg-white shadow-sm text-lg">
+                        <span class="w-8 h-8 rounded bg-gray-100 mr-4 flex items-center justify-center font-bold text-gray-400 group-hover:bg-white border group-hover:border-moe-primary shrink-0">${String.fromCharCode(65+i)}</span><span class="text-gray-700">${sanitize(opt)}</span></button>`).join('');
+                    
+                    document.getElementById('feedback-layer').classList.add('hidden');
+                    document.getElementById('ai-explain-box').classList.add('hidden');
+                    /* btn-next disabled until answered; reset text */
+                    const next = document.getElementById('btn-next');
+                    next.disabled = true;
+                    next.innerText = (idx === this.state.session.qs.length - 1) ? 'Pr\u00fcfung beenden' : 'Weiter \u276f';
+                }
             },
 
             handleAnswer: function(c) {
@@ -1078,6 +1160,8 @@
                 
                 const q = this.state.session.qs[this.state.session.idx];
                 this.state.session.lastChoice = c;
+                /* Track answer in session for navigation restore */
+                this.state.session.answers[this.state.session.idx] = c;
                 const isC = c === q.c;
 
                 /* BUG FIX #1: Always save answer to the question's category module, regardless of mode */
@@ -1086,6 +1170,17 @@
                 this.save();
 
                 if(isC) this.state.session.corrects++;
+
+                /* Update progress bar after answering (module quiz: based on correct answers) */
+                if (!this.isMasterQuiz()) {
+                    const totalQs = this.state.session.qs.length;
+                    let correctCount = 0;
+                    for (const k in this.state.session.answers) {
+                        const ai = parseInt(k);
+                        if (this.state.session.answers[k] === this.state.session.qs[ai].c) correctCount++;
+                    }
+                    document.getElementById('progress-bar').style.width = (correctCount / totalQs * 100) + '%';
+                }
                 
                 const btns = document.getElementById('options-container').children;
                 for(let i=0; i<btns.length; i++) { 
@@ -1116,6 +1211,11 @@
                 aiBtn.innerHTML = "✨ Lass dir das genauer von der KI erklären"; aiBtn.disabled = false;
                 
                 const next = document.getElementById('btn-next'); next.disabled = false; next.innerText = (this.state.session.idx === this.state.session.qs.length-1) ? "Prüfung beenden" : "Nächste Frage ❯";
+
+                /* Disable skip button after answering (use btn-next instead) */
+                if (!this.isMasterQuiz()) {
+                    document.getElementById('btn-skip').disabled = true;
+                }
                 
                 if(window.innerWidth < 768) {
                     setTimeout(() => fl.scrollIntoView({behavior: 'smooth', block: 'nearest'}), 150);
@@ -1127,8 +1227,35 @@
                 else this.finishQuiz();
             },
 
+            /* Module-only: go back one question */
+            prevQuestion: function() {
+                if (this.isMasterQuiz()) return; /* Safety: never in master quiz */
+                if (this.state.session.idx > 0) {
+                    this.state.session.idx--;
+                    this.renderQuestion();
+                    window.scrollTo(0, 0);
+                }
+            },
+
+            /* Module-only: skip forward without answering */
+            skipQuestion: function() {
+                if (this.isMasterQuiz()) return; /* Safety: never in master quiz */
+                if (this.state.session.idx < this.state.session.qs.length - 1) {
+                    this.state.session.idx++;
+                    this.renderQuestion();
+                    window.scrollTo(0, 0);
+                }
+            },
+
             finishQuiz: function() {
-                const pct = Math.round(this.state.session.corrects / this.state.session.qs.length * 100);
+                /* Recalculate corrects from answers map (authoritative source after navigation) */
+                let finalCorrects = 0;
+                for (const k in this.state.session.answers) {
+                    const ai = parseInt(k);
+                    if (this.state.session.answers[k] === this.state.session.qs[ai].c) finalCorrects++;
+                }
+                this.state.session.corrects = finalCorrects;
+                const pct = Math.round(finalCorrects / this.state.session.qs.length * 100);
                 if(this.state.session.mode === 'all') { this.state.store.masterScore = pct; this.save(); }
                 /* BUG FIX #3: Use r=80 for results circle (matches SVG r="80") */
                 this.renderCircle('res-circle', 'res-score', pct, 80);
@@ -1266,6 +1393,11 @@
                             e.preventDefault();
                             this.nextQuestion();
                             return;
+                        }
+                        /* Arrow keys for module quiz navigation (not master) */
+                        if (!this.isMasterQuiz()) {
+                            if (e.key === 'ArrowLeft') { e.preventDefault(); this.prevQuestion(); return; }
+                            if (e.key === 'ArrowRight' && !this.state.session.answered) { e.preventDefault(); this.skipQuestion(); return; }
                         }
                     }
 
