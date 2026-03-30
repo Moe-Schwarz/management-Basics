@@ -177,7 +177,7 @@
                     <div class="flex-1 text-center md:text-left">
                         <div class="flex items-center justify-center md:justify-start gap-3 mb-3">
                             <span class="px-3 py-1 rounded bg-moe-primary text-white text-xs font-bold uppercase tracking-wider">Klausur-Simulation</span>
-                            <span class="px-3 py-1 rounded bg-yellow-100 text-moe-gold border border-yellow-300 text-xs font-bold uppercase tracking-wider">★ 50 aus 142 Fragen</span>
+                            <span class="px-3 py-1 rounded bg-yellow-100 text-moe-gold border border-yellow-300 text-xs font-bold uppercase tracking-wider">★ 50 aus 236 Fragen</span>
                         </div>
                         <h2 class="text-2xl font-bold text-moe-gray mb-2">Master-Prüfung: Management Basics</h2>
                         <p class="text-gray-500">Der Algorithmus generiert eine Klausur mit 50 Fragen aus allen Vorlesungsteilen. Modul-Ergebnisse zählen hier nicht hinein.</p>
@@ -383,6 +383,9 @@
                     Zurück zur Übersicht
                 </button>
             </div>
+
+            <!-- MASTER QUIZ REVIEW SECTION (rendered dynamically) -->
+            <div id="master-review-section" class="hidden mt-8 text-left"></div>
         </div>
 
         <!-- MODAL: RETRY OPTION -->
@@ -940,7 +943,107 @@
                 { id: 'ref_64', cat: 'P5', q: "Bitte kreuzen Sie die richtige Aussage an!", o: ["Die Investition kennzeichnet die Kapitalaufbringung", "Die Finanzierung kennzeichnet die Kapitalaufbringung", "Investition und Finanzierung sind voneinander unabhängig", "Die Finanzierung kennzeichnet die Kapitalanlage"], c: 1, expl: "Laut Skript ist Finanzierung die Versorgung des Unternehmens mit dem erforderlichen Kapital – also Kapitalaufbringung. Investition ist die Kapitalverwendung. Beide sind nicht voneinander unabhängig.", memo: "Finanzierung = Kapitalaufbringung" },
                 { id: 'ref_65', cat: 'P5', q: "Welche der Finanzierungsvarianten kennzeichnen eine Außenfinanzierung?", o: ["Beteiligungsfinanzierung", "Selbstfinanzierung", "Finanzierung aus Kapitalfreisetzung", "Finanzierung aus Abschreibungen"], c: 0, expl: "Laut Skript gehört die Beteiligungsfinanzierung (Einlagenfinanzierung) zur Außenfinanzierung – Kapital fließt von externen Kapitalgebern zu. Selbstfinanzierung, Kapitalfreisetzung und Abschreibungen sind Innenfinanzierung.", memo: "Beteiligung = Außenfinanzierung" },
                 { id: 'ref_66', cat: 'P5', q: "Welche der Finanzierungsvarianten kennzeichnen eine private Finanzierung?", o: ["Fördergelder durch den Bund", "Spenden", "Krankenkassen-Entgelte", "Zuschüsse durch den Träger"], c: 1, expl: "Laut Skript fallen Spenden unter 'Finanzierung durch Privatpersonen und private Institutionen'. Fördergelder vom Bund, Krankenkassen-Entgelte und Trägerzuschüsse zählen zur öffentlichen Finanzierung.", memo: "Spenden = private Finanzierung" },
-                { id: 'ref_67', cat: 'P5', q: "In welchem Fall wird über die „Crowd“ Geld verliehen?", o: ["Crowd Donating", "Crowd Investing", "Crowd Sponsoring", "Crowd Lending"], c: 3, expl: "Beim Crowd Lending verleiht die Crowd Geld als Darlehen mit Rückzahlungspflicht und Zinsen (Fremdkapital). Crowd Investing ist Eigenkapitalbeteiligung, Donating ist Spende, Sponsoring liefert eine nicht-finanzielle Gegenleistung.", memo: "Lending = Geld verleihen" }
+                { id: 'ref_67', cat: 'P5', q: "In welchem Fall wird über die „Crowd“ Geld verliehen?", o: ["Crowd Donating", "Crowd Investing", "Crowd Sponsoring", "Crowd Lending"], c: 3, expl: "Beim Crowd Lending verleiht die Crowd Geld als Darlehen mit Rückzahlungspflicht und Zinsen (Fremdkapital). Crowd Investing ist Eigenkapitalbeteiligung, Donating ist Spende, Sponsoring liefert eine nicht-finanzielle Gegenleistung.", memo: "Lending = Geld verleihen" },
+
+                // --- Neue Fragen aus MC-PDF & Übungsklausur (ref_68 – ref_91) ---
+                { id: 'ref_68', cat: 'P5', q: "Welches Beispiel kennzeichnet die Eigenschaft eines C-Gutes?", o: ["Mittlerer Mengenanteil, mittlerer Wertanteil", "Hoher Mengenanteil, geringer Wertanteil", "Konstanter Verbrauch", "Geringer Mengenanteil, hoher Wertanteil"], c: 1, expl: "C-Güter: Hoher Mengenanteil (~50%), aber geringer Wertanteil (~5%). Beispiel: Büromaterial, Verbrauchsmaterialien. Einfache Beschaffung, geringe Kontrolle nötig.", memo: "C = Cheap & Common: viel Menge, wenig Wert." },
+                { id: 'ref_69', cat: 'P5', q: "Welches Beispiel kennzeichnet die Eigenschaft eines Y-Gutes?", o: ["Konstanter Verbrauch", "Saisonaler Verbrauch", "Geringer Mengenanteil, hoher Wertanteil", "Unregelmäßiger Verbrauch"], c: 1, expl: "Y-Güter haben saisonalen/trendmäßigen Verbrauch. X = konstant, Y = saisonal/schwankend, Z = unregelmäßig/kaum vorhersagbar.", memo: "Y wie Jahreszeiten (Year) = saisonal." },
+                { id: 'ref_70', cat: 'P2', q: "Was sind originäre Produktionsfaktoren?", o: ["Organisation", "Planung", "Roh-, Hilfs-, Betriebsstoffe", "Informationen"], c: 2, expl: "Originäre (elementare) Produktionsfaktoren nach Gutenberg: Menschliche Arbeit, Betriebsmittel und Werkstoffe (Roh-, Hilfs-, Betriebsstoffe). Organisation und Planung sind derivative Faktoren.", memo: "Originär = die Grundstoffe: Mensch, Maschine, Material." },
+                { id: 'ref_71', cat: 'P2', q: "Fixe Kosten sind...", o: ["...unabhängig von der Auslastung", "...abhängig von der Auslastung"], c: 0, expl: "Fixe Kosten fallen unabhängig von der Auslastung an (z.B. Miete, Gehälter). Variable Kosten hingegen ändern sich mit der Auslastung.", memo: "Fix = fest = egal wie viel produziert wird." },
+                { id: 'ref_72', cat: 'P5', q: "Welches sind typische psychologische Ziele des Marketing?", o: ["Image, Kundentreue", "Gewinn, Liquidität", "Image, Kundenunzufriedenheit", "Absatzmenge, Deckungsbeitrag"], c: 0, expl: "Psychologische Marketingziele: Image, Kundentreue, Bekanntheitsgrad. Wirtschaftliche Marketingziele: Gewinn, Umsatz, Deckungsbeitrag, Marktanteil.", memo: "Psycho = Kopf: Image + Treue. Wirtschaftlich = Geld." },
+                { id: 'ref_73', cat: 'P5', q: "Welches sind Bausteine des CI-Mixes?", o: ["Corporate Behavior, Corporate Social Responsibility", "Corporate Behavior, Corporate Benefits", "Corporate Design, Corporate Behavior", "Corporate Design, Corporate Governance"], c: 2, expl: "Der CI-Mix (Corporate Identity) besteht aus: Corporate Design (visuell), Corporate Behavior (Verhalten) und Corporate Communication (Kommunikation).", memo: "CI = Design + Behavior + Communication." },
+                { id: 'ref_74', cat: 'P5', q: "Was ist eine S-O-Strategie?", o: ["Die vorhandenen Stärken nutzen, um die Gelegenheiten auszunutzen", "Die vorhandenen Schwächen mindern, um die Bedrohungen zu bekämpfen", "Die vorhandenen Stärken nutzen, um die Bedrohungen zu bekämpfen", "Die vorhandenen Schwächen mindern, um die Gelegenheiten auszunutzen"], c: 0, expl: "S-O = Strengths-Opportunities: Eigene Stärken einsetzen, um Chancen am Markt zu ergreifen. Offensivste aller SWOT-Strategien.", memo: "S-O = Stark + Chance = Vollgas!" },
+                { id: 'ref_75', cat: 'P5', q: "Was ist eine 'Cash-Cow-Position'?", o: ["Hohes Marktwachstum, niedriger relativer Marktanteil", "Hohes Marktwachstum, hoher relativer Marktanteil", "Niedriges Marktwachstum, niedriger relativer Marktanteil", "Niedriges Marktwachstum, hoher relativer Marktanteil"], c: 3, expl: "Cash Cow: Niedriges Marktwachstum, aber hoher relativer Marktanteil. Generiert stabile Einnahmen bei geringem Investitionsbedarf. Normstrategie: Abschöpfung.", memo: "Cash Cow = Melkkuh: Markt wächst nicht, aber wir dominieren." },
+                { id: 'ref_76', cat: 'P5', q: "Welches der Ziele gehört zu den monetären Zielen?", o: ["Mitarbeiterzufriedenheit", "Liquidität", "Kundenzufriedenheit", "Umweltschutz"], c: 1, expl: "Monetäre Ziele sind in Geldeinheiten messbar: Gewinn, Rentabilität, Liquidität, Umsatz, Sicherheit. Nicht-monetär: Zufriedenheit, Image, Umweltschutz.", memo: "Monetär = Geld. Liquidität = Zahlungsfähigkeit = Geld." },
+                { id: 'ref_77', cat: 'P5', q: "Welche der Komponenten gehört nicht zum 5-Forces-Modell?", o: ["Verhandlungsmacht der Lieferanten", "Verhandlungsmacht der Shareholder", "Verhandlungsmacht der Abnehmer", "Ersatzprodukte"], c: 1, expl: "Die 5 Forces nach Porter: (1) Wettbewerber, (2) Lieferantenmacht, (3) Abnehmermacht, (4) Ersatzprodukte, (5) Neue Marktteilnehmer. Shareholder gehören nicht dazu.", memo: "5 Forces = kein Shareholder! Die 5: Rivalen, Lieferanten, Kunden, Substitute, Neue." },
+                { id: 'ref_78', cat: 'P5', q: "Stefan W. möchte ein Möbelunternehmen allein gründen. Welche Rechtsform könnte er wählen?", o: ["Stefan W. OHG", "Stefan W. e.G", "Stefan W. GbR", "Stefan W. GmbH"], c: 3, expl: "OHG und GbR erfordern mind. 2 Gesellschafter. e.G. (Genossenschaft) erfordert mind. 3 Mitglieder. Nur die GmbH kann von einer Person allein gegründet werden (Ein-Personen-GmbH).", memo: "Allein gründen mit Haftungsschutz = GmbH." },
+                { id: 'ref_79', cat: 'P5', q: "Welches der folgenden Unternehmen ist eine Personengesellschaft?", o: ["Fräsen und Schneiden AG", "Wohnungsbau e.G.", "Müller Büroschränke KG", "Fräsen und Schneiden GmbH"], c: 2, expl: "KG (Kommanditgesellschaft) = Personengesellschaft. AG und GmbH = Kapitalgesellschaften. e.G. = Genossenschaft (Sonderform).", memo: "KG = Personengesellschaft. AG/GmbH = Kapitalgesellschaft." },
+                { id: 'ref_80', cat: 'P5', q: "Welcher der Personen ist ein Freiberufler?", o: ["Selbständiger Physiotherapeut", "Selbständiger Apotheker", "Selbständige Pflegekraft", "Angestellter Arzt"], c: 0, expl: "Freiberufler üben einen 'Katalogberuf' aus (§ 18 EStG): Ärzte, Physiotherapeuten, Anwälte, etc. Apotheker und Pflegekräfte sind Gewerbetreibende. Angestellte sind nie Freiberufler.", memo: "Physiotherapeut = Heilberuf = Freiberufler." },
+                { id: 'ref_81', cat: 'P2', q: "Was sind Elementarfaktoren?", o: ["Koordinierende menschliche Arbeit", "Informationen", "Organisation", "Roh-, Hilfs-, Betriebsstoffe"], c: 3, expl: "Elementarfaktoren nach Gutenberg: (1) Ausführende menschliche Arbeit, (2) Betriebsmittel, (3) Werkstoffe (Roh-, Hilfs-, Betriebsstoffe). Koordinierende Arbeit und Organisation gehören zu den dispositiven Faktoren.", memo: "Elementar = Grundstoffe: Arbeit + Maschinen + Material." },
+                { id: 'ref_82', cat: 'P2', q: "Effektivität...", o: ["...kennzeichnet die Wirtschaftlichkeit", "...kennzeichnet die Wirksamkeit", "...kennzeichnet die Kundenzufriedenheit", "...kennzeichnet die Mitarbeiterzufriedenheit"], c: 1, expl: "Effektivität = Wirksamkeit (die richtigen Dinge tun). Effizienz = Wirtschaftlichkeit (die Dinge richtig tun). Merke: EffEKTivität = EffEKT = Wirkung.", memo: "EffEKTivität = EffEKT = Wirkung!" },
+                { id: 'ref_83', cat: 'P3', q: "Welche der Aufgaben gehört nicht zu den klassischen Managementfunktionen?", o: ["Kontrolle", "Planung", "Organisation", "Dokumentation"], c: 3, expl: "Die klassischen Managementfunktionen: Planung, Organisation, Führung, Kontrolle (P-O-F-K). Dokumentation gehört nicht dazu.", memo: "P-O-F-K: Planung, Organisation, Führung, Kontrolle. Kein D!" },
+                { id: 'ref_84', cat: 'P2', q: "Welcher der unteren Faktoren gehört zu den dispositiven Faktoren?", o: ["Werkstoffe", "Menschliche Arbeitsleistung", "Betriebsmittel", "Geschäftsleitung"], c: 3, expl: "Dispositive Faktoren nach Gutenberg: Geschäftsleitung, Planung, Organisation. Werkstoffe, menschliche Arbeitsleistung und Betriebsmittel sind Elementarfaktoren.", memo: "Dispositiv = disponieren = lenken = Geschäftsleitung." },
+                { id: 'ref_85', cat: 'P2', q: "Wirtschaftlichkeit...", o: ["...kennzeichnet die wertmäßige Ergiebigkeit eines Produktionsfaktors", "...kennzeichnet die mengenmäßige Ergiebigkeit eines Produktionsfaktors", "...ist ein monetärer Wert", "...ist ein absolutes Maß"], c: 0, expl: "Wirtschaftlichkeit = wertmäßige Ergiebigkeit (Ertrag ÷ Aufwand in Euro). Produktivität = mengenmäßige Ergiebigkeit (Output ÷ Input in Mengen). Beide sind Verhältniszahlen, keine absoluten Maße.", memo: "Wirtschaftlichkeit = WERT (€). Produktivität = MENGE." },
+                { id: 'ref_86', cat: 'P4', q: "Welche Eigenschaft trifft auf freigemeinnützige Träger in der Gefahrenabwehr nicht zu?", o: ["Spenden als Finanzierungsquelle", "Hohe Bedeutung des Ehrenamtes", "Shareholder Value Orientierung", "Selbstkostendeckungsansatz"], c: 2, expl: "Freigemeinnützige Träger (z.B. DRK, Malteser) verfolgen KEINE Shareholder-Value-Orientierung. Sie finanzieren sich u.a. über Spenden, Ehrenamt und streben Kostendeckung an.", memo: "Freigemeinnützig ≠ Shareholder Value. Kein Gewinnziel!" },
+                { id: 'ref_87', cat: 'P4', q: "Welches ist eine typische Eigenschaft der Gefahrenabwehr?", o: ["Agieren auf den Kapitalmärkten", "Hohe finanzielle Beteiligung der Klienten", "Politische Abhängigkeit von Angebot und Nachfrage", "Politische Unabhängigkeit von Angebot und Nachfrage"], c: 2, expl: "Gefahrenabwehr ist politisch abhängig: Angebot und Nachfrage werden nicht durch den Markt, sondern durch politische Entscheidungen gesteuert (Daseinsvorsorge, gesetzliche Pflichtaufgaben).", memo: "Gefahrenabwehr = Politik bestimmt, nicht der Markt." },
+                { id: 'ref_88', cat: 'P4', q: "Welches ist eine typische Besonderheit von Dienstleistungen in der Gefahrenabwehr?", o: ["Sicherheitsbetonte Leistungserstellung", "Umfangreiche Möglichkeiten der Kundenbindung", "Geringer staatlicher Einfluss", "Hohes Maß an Konsumentensouveränität"], c: 0, expl: "Dienstleistungen in der Gefahrenabwehr sind sicherheitsbetont. Kundenbindung ist eingeschränkt (Pflichtversorgung), staatlicher Einfluss ist hoch und Konsumentensouveränität gering.", memo: "Gefahrenabwehr = Sicherheit first!" },
+                { id: 'ref_89', cat: 'P5', q: "Was ist eine 'Star-Position'?", o: ["Hohes Marktwachstum, hoher relativer Marktanteil", "Hohes Marktwachstum, niedriger relativer Marktanteil", "Niedriges Marktwachstum, hoher relativer Marktanteil", "Niedriges Marktwachstum, niedriger relativer Marktanteil"], c: 0, expl: "Star (Stern): Hohes Marktwachstum + hoher Marktanteil. Investitionsbedarf hoch, aber Marktführer. Normstrategie: Investieren/Wachsen.", memo: "Star = oben rechts in BCG: Alles hoch!" },
+                { id: 'ref_90', cat: 'P4', q: "Welche der Finanzierungsvarianten kennzeichnen eine öffentliche Finanzierung?", o: ["Selbstzahler", "Zuschüsse durch den Träger", "Spenden", "GKV-Entgelte"], c: 3, expl: "Öffentliche Finanzierung: Leistungsentgelte der Sozialversicherungsträger (GKV, Pflegekasse), Steuermittel. Spenden und Selbstzahler sind private Finanzierung. Trägerzuschüsse können je nach Träger öffentlich oder privat sein.", memo: "Öffentlich = GKV zahlt = Sozialversicherung." },
+                { id: 'ref_91', cat: 'P5', q: "In welchem Fall wird über die 'Crowd' Eigenkapital aufgenommen?", o: ["Crowd Lending", "Crowd Donating", "Crowd Investing", "Crowd Sponsoring"], c: 2, expl: "Crowd Investing = Eigenkapital (Beteiligung). Crowd Lending = Fremdkapital (Kredit). Crowd Donating = Spende. Crowd Sponsoring = Gegenleistung.", memo: "Investing = Eigenkapital. Lending = Fremdkapital." },
+
+                // --- Expansion-Fragen (ref_92 – ref_108) – freigegeben ---
+                { id: 'ref_92', cat: 'P5', q: "Welche der folgenden ist eine öffentlich-rechtliche Rechtsform?", o: ["GmbH", "Kommanditgesellschaft", "Eigenbetrieb", "Eingetragener Verein"], c: 2, expl: "Öffentlich-rechtliche Rechtsformen: Regiebetrieb, Eigenbetrieb, Anstalt öffentlichen Rechts, Körperschaft öffentlichen Rechts, Stiftung öffentlichen Rechts. GmbH und KG sind gewerbliche Rechtsformen, e.V. ist eine sonstige Rechtsform.", memo: "Öffentlich-rechtlich: Regiebetrieb, Eigenbetrieb, Anstalt, Körperschaft, Stiftung ö.R." },
+                { id: 'ref_93', cat: 'P5', q: "Wie viele Gesellschafter benötigt man mindestens zur Gründung einer OHG?", o: ["1 Gesellschafter", "2 Gesellschafter", "3 Gesellschafter", "7 Gesellschafter"], c: 1, expl: "Eine OHG (Offene Handelsgesellschaft) erfordert mindestens 2 Gesellschafter, die persönlich und unbeschränkt haften. Eine GmbH kann auch als Ein-Personen-GmbH gegründet werden.", memo: "OHG = mindestens 2. GmbH = auch 1 möglich." },
+                { id: 'ref_94', cat: 'P5', q: "Wie viele Mitglieder benötigt eine eingetragene Genossenschaft (e.G.) mindestens?", o: ["1 Mitglied", "2 Mitglieder", "3 Mitglieder", "7 Mitglieder"], c: 2, expl: "Eine eingetragene Genossenschaft (e.G.) erfordert nach dem Genossenschaftsgesetz mindestens 3 Mitglieder. Sie verfolgt den Zweck, den Erwerb oder die Wirtschaft ihrer Mitglieder zu fördern.", memo: "e.G. = mindestens 3 Mitglieder." },
+                { id: 'ref_95', cat: 'P5', q: "Was kennzeichnet eine Spartenorganisation (Divisionalorganisation)?", o: ["Gliederung nach Funktionen (Beschaffung, Fertigung, Marketing)", "Gliederung nach Produktgruppen, Regionen oder Kundengruppen", "Alle Mitarbeiter berichten an einen einzigen Vorgesetzten", "Es gibt keine feste Hierarchie"], c: 1, expl: "Die Spartenorganisation (Divisionalorganisation) gliedert das Unternehmen nach Produktgruppen, Regionen oder Kundengruppen (Sparten). Jede Sparte hat eigene Funktionsbereiche. Die funktionale Organisation gliedert dagegen nach Funktionen.", memo: "Sparten = nach Produkt/Region/Kunde. Funktional = nach Abteilung." },
+                { id: 'ref_96', cat: 'P5', q: "Welches der folgenden Instrumente gehört NICHT zum erweiterten Marketing-Mix im Dienstleistungsbereich?", o: ["Leistungspolitik (Produktmix)", "Kontrahierungspolitik (Preismix)", "Forschungspolitik", "Prozesspolitik"], c: 2, expl: "Der erweiterte Marketing-Mix für Dienstleistungen umfasst: Leistungs-, Kontrahierungs-, Vertriebs-, Kommunikations-, Prozess-, Ausstattungs- und Personalpolitik. Eine 'Forschungspolitik' gehört nicht dazu.", memo: "DL-Marketing-Mix: Leistung, Preis, Vertrieb, Kommunikation, Prozess, Ausstattung, Personal." },
+                { id: 'ref_97', cat: 'P5', q: "Was versteht man unter Corporate Design?", o: ["Das einheitliche Verhalten der Mitarbeiter", "Die konsistente visuelle Erscheinung eines Unternehmens (Logo, Farben, Schriften)", "Die Kommunikationsstrategie des Unternehmens", "Die Organisationsstruktur des Unternehmens"], c: 1, expl: "Corporate Design = das konsistente Erscheinungsbild eines Unternehmens: Logo (Bild-, Wort-, kombinierte Marken), Farben, Schriften, Formulare, Architektur. Teil des CI-Mix neben Corporate Behavior und Corporate Communications.", memo: "Corporate Design = visuell: Logo + Farben + Schriften." },
+                { id: 'ref_98', cat: 'P5', q: "Was sind Leitsätze der Öffentlichkeitsarbeit (PR)?", o: ["Gewinnmaximierung und Shareholder Value", "Wahrheit, Klarheit, Einheit von Wort und Tat", "Vertraulichkeit, Exklusivität, Diskretion", "Innovation, Disruption, Skalierung"], c: 1, expl: "Leitsätze der Öffentlichkeitsarbeit (PR): Wahrheit, Klarheit, Einheit von Wort und Tat. Instrumente: Webpage/Soziale Netzwerke, Pressearbeit, Events/Messen.", memo: "PR-Leitsätze: Wahrheit + Klarheit + Wort = Tat." },
+                { id: 'ref_99', cat: 'P5', q: "Welches ist ein Beispiel für variable Einzelkosten?", o: ["Miete für Geschäftsräume", "Zeitlöhne", "Rohstoffe", "Gehälter"], c: 2, expl: "Rohstoffe sind variable Einzelkosten – sie verändern sich mit der Produktionsmenge und sind einem Kostenträger direkt zurechenbar. Miete und Gehälter sind fixe Gemeinkosten, Zeitlöhne sind fixe Kosten.", memo: "Variable Einzelkosten: Rohstoffe, Akkordlöhne, Provisionen." },
+                { id: 'ref_100', cat: 'P5', q: "Was ist der Unterschied zwischen Aufwand und Kosten?", o: ["Aufwand ist immer höher als Kosten", "Aufwand gehört zum externen, Kosten zum internen Rechnungswesen", "Aufwand ist nur zahlungswirksam, Kosten nicht", "Es gibt keinen Unterschied"], c: 1, expl: "Aufwand (Ertrag) sind Grundgrößen des externen Rechnungswesens (GuV, Bilanz). Kosten (Leistungen) gehören zum internen Rechnungswesen (Kostenrechnung). Es gibt Überschneidungen (Grundkosten = Zweckaufwand).", memo: "Aufwand = extern (GuV). Kosten = intern (KLR)." },
+                { id: 'ref_101', cat: 'P5', q: "Was ist Selbstfinanzierung?", o: ["Finanzierung durch Bankkredit", "Finanzierung durch neue Gesellschaftereinlagen", "Finanzierung aus einbehaltenen Gewinnen", "Finanzierung durch Ausgabe von Aktien"], c: 2, expl: "Selbstfinanzierung = Finanzierung aus einbehaltenen Gewinnen (Innenfinanzierung + Eigenfinanzierung). Bankkredit = Kreditfinanzierung (Außen + Fremd). Neue Einlagen/Aktien = Beteiligungsfinanzierung (Außen + Eigen).", memo: "Selbstfinanzierung = Gewinn behalten = Innen + Eigen." },
+                { id: 'ref_102', cat: 'P5', q: "Was ist eine Erweiterungsinvestition?", o: ["Ersatz einer alten Maschine durch eine gleichartige", "Anschaffung zusätzlicher Kapazitäten zur Produktionsausweitung", "Verkauf eines Unternehmensbereichs", "Rationalisierung bestehender Prozesse"], c: 1, expl: "Erweiterungsinvestition = Anschaffung zusätzlicher Kapazitäten zur Ausweitung der Produktion. Ersatzinvestition = Austausch alter Anlagen. Rationalisierungsinvestition = Effizienzsteigerung bestehender Prozesse.", memo: "Erweiterung = MEHR Kapazität. Ersatz = ALT gegen NEU. Rationalisierung = EFFIZIENTER." },
+                { id: 'ref_103', cat: 'P5', q: "Welches ist ein statisches Investitionsrechenverfahren?", o: ["Kapitalwertmethode", "Interne Zinsfußmethode", "Kostenvergleichsrechnung", "Annuitätenmethode"], c: 2, expl: "Statische Verfahren: Kostenvergleich, Gewinnvergleich, Rentabilitätsrechnung, Amortisationsrechnung. Dynamische Verfahren (berücksichtigen Zeitwert des Geldes): Kapitalwert, interner Zinsfuß, Annuität.", memo: "Statisch: Kosten, Gewinn, Rentabilität, Amortisation. Dynamisch: Kapitalwert, Zinsfuß, Annuität." },
+                { id: 'ref_104', cat: 'P5', q: "Welche Dimension gehört NICHT zu den Leitfragen der Personalplanung?", o: ["Zeitliche Dimension (wann?)", "Quantitative Dimension (wie viele?)", "Qualitative Dimension (welche Qualifikationen?)", "Finanzielle Dimension (welcher Aktienkurs?)"], c: 3, expl: "Leitfragen der Personalplanung: Wann (zeitlich), wo/welcher Standort (lokal), wie viele (quantitativ), welche Qualifikationen (qualitativ). Eine 'finanzielle Dimension' zum Aktienkurs gehört nicht dazu.", memo: "Personalplanung: WANN, WO, WIE VIELE, WELCHE Quali." },
+                { id: 'ref_105', cat: 'P5', q: "Was ist das Kernziel der Beschaffung?", o: ["Maximierung des Lagerbestands zur Risikoabsicherung", "Richtiges Teil in benötigter Menge, Qualität und Preis zur richtigen Zeit und am richtigen Ort", "Beauftragung möglichst vieler Lieferanten zur Risikostreuung", "Ausschließliche Nutzung inländischer Lieferanten zur Qualitätssicherung"], c: 1, expl: "Beschaffungsziel: Das richtige Teil in der benötigten Menge, vorgegebenen Qualität und niedrigem Preis zur richtigen Zeit am richtigen Ort. Nebenbedingungen: Senkung von Beständen, Durchlaufzeiten und Transaktionskosten.", memo: "Beschaffung: Richtiges Teil, richtige Menge, Qualität, Preis, Zeit, Ort." },
+                { id: 'ref_106', cat: 'P4', q: "Welche der folgenden Qualitätsdimensionen nach Donabedian bezieht sich auf die Voraussetzungen der Leistungserstellung?", o: ["Prozessqualität", "Ergebnisqualität", "Strukturqualität", "Servicequalität"], c: 2, expl: "Strukturqualität: Alle strukturellen Voraussetzungen (personelle Qualifikation, apparative Einrichtung, Organisation). Prozessqualität: Art und Weise der Leistungserbringung. Ergebnisqualität: Behandlungsergebnis, Patientenzufriedenheit.", memo: "Struktur = Voraussetzungen. Prozess = Durchführung. Ergebnis = Resultat." },
+                { id: 'ref_107', cat: 'P2', q: "Was unterscheidet einen Betrieb von einem Unternehmen?", o: ["Ein Betrieb ist die organisatorisch-technische Grundlage, ein Unternehmen die wirtschaftlich-rechtliche Einheit", "Ein Betrieb ist immer größer als ein Unternehmen", "Ein Betrieb hat keine Mitarbeiter", "Es gibt keinen Unterschied"], c: 0, expl: "Betrieb = organisatorisch-technische Grundlage der Produktion. Unternehmen = wirtschaftlich-rechtliche Einheit mit Gewinnstreben als leitender Idee. Das Unternehmen umfasst den Betrieb.", memo: "Betrieb = Technik + Organisation. Unternehmen = Wirtschaft + Recht + Gewinn." },
+                { id: 'ref_108', cat: 'P3', q: "Welches ist eine Maßnahme der Katastrophenprävention?", o: ["Alarmierung der Einsatzkräfte", "Rettung von Verletzten", "Erstellung von Schutzplänen und Durchführung von Übungen", "Opferhilfe und Wiederaufbau"], c: 2, expl: "Katastrophenprävention: Risikoanalysen, Schutzbauten, Frühwarn-/Alarmsysteme, Einsatzbereitschaft, Schutzpläne/Übungen. Bekämpfung: Alarmierung, Rettung, Opferhilfe, Wiederaufbau.", memo: "Prävention = VORHER (Pläne, Übungen). Bekämpfung = WÄHREND/NACHHER (Rettung, Aufbau)." },
+
+                // --- Experten-Fragen (ref_109 – ref_161) – Notizen + Skript ---
+                { id: 'ref_109', cat: 'P5', q: "Was erfasst der Total Cost of Ownership (TCO)?", o: ["Anschaffungskosten", "Betriebskosten", "Alle Lebenszykluskosten", "Entsorgungskosten"], c: 2, expl: "TCO erfasst sämtliche Kosten über den gesamten Lebenszyklus: Anschaffung, Betrieb, Wartung, Schulung und Entsorgung. Einzelne Kostenarten wie Anschaffung oder Entsorgung allein sind zu eng gefasst.", memo: "TCO = ALLE Kosten von Kauf bis Entsorgung." },
+                { id: 'ref_110', cat: 'P5', q: "Welche Kostenarten gehören zum TCO neben dem Kaufpreis?", o: ["Wartung und Schulung", "Versandkosten", "Garantiekosten", "Personalkosten"], c: 0, expl: "Zum TCO zählen neben dem Kaufpreis: Wartung, Schulung, Betriebskosten, Ausfallkosten und Entsorgung. Versand-, Garantie- oder Personalkosten allein sind zu eng gefasst.", memo: "TCO-Extras: Wartung + Schulung + Betrieb + Entsorgung." },
+                { id: 'ref_111', cat: 'P5', q: "Was sind Abschreibungen?", o: ["Gewinnausschüttungen", "Wertverlust von Anlagen", "Zinserträge", "Kapitalerhöhungen"], c: 1, expl: "Abschreibungen erfassen den Wertverlust von Anlagegütern über deren Nutzungsdauer. Sie mindern den Buchwert und werden als Aufwand in der GuV verbucht.", memo: "Abschreibung = Wertverlust pro Jahr erfassen." },
+                { id: 'ref_112', cat: 'P5', q: "Welche Abschreibungsmethode verteilt den Wertverlust gleichmäßig?", o: ["Degressive Methode", "Lineare Methode", "Leistungsabschreibung", "Progressive Methode"], c: 1, expl: "Die lineare Abschreibung verteilt den Anschaffungswert gleichmäßig über die Nutzungsdauer (z.B. 10.000€ / 5 Jahre = 2.000€/Jahr). Die degressive Methode schreibt anfangs höher ab.", memo: "Linear = gleiche Beträge jedes Jahr." },
+                { id: 'ref_113', cat: 'P5', q: "Wie lautet die Formel für den Umsatz?", o: ["Gewinn + Steuern", "Menge × Preis", "Ertrag − Aufwand", "Aktiva − Passiva"], c: 1, expl: "Umsatz = Absatzmenge × Verkaufspreis. Der Gewinn ergibt sich erst nach Abzug der Aufwendungen vom Umsatz. Aktiva − Passiva beschreibt keine betriebswirtschaftliche Größe.", memo: "Umsatz = Menge × Preis. Gewinn = Umsatz − Kosten." },
+                { id: 'ref_114', cat: 'P2', q: "Wie berechnet sich der Gewinn?", o: ["Menge × Preis", "Umsatz − Aufwendungen", "Aktiva + Passiva", "Kosten × Menge"], c: 1, expl: "Gewinn = Umsatzerlöse minus Aufwendungen. Der Umsatz allein (Menge × Preis) ist noch kein Gewinn, da die Kosten noch nicht abgezogen wurden.", memo: "Gewinn = Umsatz − Aufwendungen." },
+                { id: 'ref_115', cat: 'P5', q: "Was unterscheidet Vision von Strategie?", o: ["Vision = kurzfristig", "Vision = Zielbild", "Vision = Maßnahmenplan", "Vision = Budget"], c: 1, expl: "Die Vision beschreibt ein langfristiges, übergeordnetes Zielbild ('Wo wollen wir hin?'). Die Strategie definiert den konkreten Weg dorthin. Eine Vision ist abstrakt, eine Strategie operationalisierbar.", memo: "Vision = Traum/Zielbild. Strategie = Weg dorthin." },
+                { id: 'ref_116', cat: 'P5', q: "Was passiert, wenn Substitute auf den Markt kommen (Porter)?", o: ["Wettbewerb sinkt", "Wettbewerb steigt", "Preise steigen", "Nachfrage bleibt gleich"], c: 1, expl: "Substitute (Ersatzprodukte) erhöhen den Wettbewerbsdruck, da Kunden auf Alternativen ausweichen können. Nach Porters Five Forces senkt dies die Profitabilität der Branche.", memo: "Substitute → mehr Wettbewerb → weniger Profit." },
+                { id: 'ref_117', cat: 'P5', q: "Was ist eine 'Question-Mark-Position' in der BCG-Matrix?", o: ["Niedrig / niedrig", "Hoch / niedrig", "Niedrig / hoch", "Hoch / hoch"], c: 1, expl: "Question Mark: Hohes Marktwachstum, aber niedriger relativer Marktanteil. Normstrategie: Selektiv investieren oder desinvestieren. Unsichere Zukunft − daher das Fragezeichen.", memo: "Question Mark = hohes Wachstum, niedriger Anteil. Selektiv!" },
+                { id: 'ref_118', cat: 'P5', q: "Was ist eine 'Poor-Dog-Position'?", o: ["Hoch / hoch", "Hoch / niedrig", "Niedrig / hoch", "Niedrig / niedrig"], c: 3, expl: "Poor Dog: Niedriges Marktwachstum und niedriger relativer Marktanteil. Normstrategie: Desinvestieren oder Liquidieren. Kein Wachstum, keine Marktstellung.", memo: "Poor Dog = alles niedrig → raus damit!" },
+                { id: 'ref_119', cat: 'P5', q: "Was ist die Normstrategie für Question Marks?", o: ["Abschöpfen", "Selektiv vorgehen", "Position halten", "Liquidieren"], c: 1, expl: "Question Marks haben Potenzial (hohes Wachstum), aber schwache Marktstellung. Die Normstrategie ist selektives Vorgehen: Gezielt investieren oder abstoßen.", memo: "Question Mark → selektiv: Chance nutzen oder lassen." },
+                { id: 'ref_120', cat: 'P5', q: "Welche Normstrategie gilt für Poor Dogs?", o: ["Investieren", "Ernten", "Desinvestieren", "Fördern"], c: 2, expl: "Poor Dogs (niedrig/niedrig) binden Ressourcen ohne Perspektive. Normstrategie: Desinvestieren oder liquidieren. Investitionen wären hier Kapitalvernichtung.", memo: "Poor Dog → Desinvestieren. Keine Zukunft." },
+                { id: 'ref_121', cat: 'P5', q: "Was ist ein Merkmal der Makroanalyse (PESTEL)?", o: ["Interne Stärken", "Externe Umfeldfaktoren", "Mitarbeiterleistung", "Produktqualität"], c: 1, expl: "Die Makroanalyse (PESTEL) untersucht externe Umfeldfaktoren: Political, Economic, Social, Technological, Environmental, Legal. Interne Faktoren gehören zur SWOT-Analyse.", memo: "PESTEL = externes Makroumfeld. SWOT = intern + extern." },
+                { id: 'ref_122', cat: 'P5', q: "Was ist KEINE Aufgabe der Planung?", o: ["Risikominderung", "Orientierungshilfe", "Personalentlassung", "Komplexitätsreduktion"], c: 2, expl: "Aufgaben der Planung: Minderung des Risikos von Fehlentscheidungen, Schaffung von Handlungsspielräumen, Orientierungshilfe, Reduktion von Komplexität. Personalentlassung ist keine Planungsaufgabe.", memo: "Planung: Risiko ↓, Spielräume ↑, Orientierung, Komplexität ↓." },
+                { id: 'ref_123', cat: 'P5', q: "Was beschreibt die Make-or-Buy-Entscheidung?", o: ["Kauf oder Miete", "Eigenfertigung oder Fremdbezug", "Import oder Export", "Fusion oder Übernahme"], c: 1, expl: "Make or Buy: Soll ein Unternehmen selbst produzieren (Make) oder extern einkaufen (Buy)? Kriterien: Kernkompetenzen, Kosten, Kapazitäten, Lieferangebot.", memo: "Make or Buy = selbst machen oder kaufen?" },
+                { id: 'ref_124', cat: 'P5', q: "Was ist Employer Branding?", o: ["Produktwerbung", "Arbeitgeberattraktivität", "Kundenakquise", "Markenrecht"], c: 1, expl: "Employer Branding zielt auf eine hohe Attraktivität als Arbeitgeber für hochqualifizierte Talente. Es ist Teil der Personalbeschaffungsstrategie, nicht der Produktvermarktung.", memo: "Employer Branding = attraktiver Arbeitgeber sein." },
+                { id: 'ref_125', cat: 'P5', q: "Was kennzeichnet das 'Organisations-Management' im GRID-Modell?", o: ["Hoch / hoch", "Gering / gering", "Mittel / mittel", "Hoch / gering"], c: 2, expl: "Organisations-Management (5,5-Position): Mittlere Sach- und mittlere Personenorientierung. 'Leben und leben lassen', Interessensausgleich bei Konflikten.", memo: "Organisations-Management = Mittelweg: mittel/mittel." },
+                { id: 'ref_126', cat: 'P5', q: "Was ist die Lokomotionsfunktion der Führung?", o: ["Kontrollfunktion", "Aktivierung und Motivation", "Dokumentationsfunktion", "Planungsfunktion"], c: 1, expl: "Die Lokomotionsfunktion umfasst Aktivierung und Motivation der Mitarbeiter. Die Kohäsionsfunktion sichert Zusammenhalt und Loyalität. Beide sind zentrale Führungsfunktionen.", memo: "Lokomotion = Antrieb + Motivation. Kohäsion = Zusammenhalt." },
+                { id: 'ref_127', cat: 'P5', q: "Was ist die Kohäsionsfunktion der Führung?", o: ["Gewinnsteigerung", "Zusammenhalt und Loyalität", "Qualitätskontrolle", "Budgetplanung"], c: 1, expl: "Die Kohäsionsfunktion der Personalführung sorgt für Zusammenhalt und Loyalität im Team. Sie ergänzt die Lokomotionsfunktion (Aktivierung) und die Identifikationsfunktion.", memo: "Kohäsion = Kleber im Team: Zusammenhalt + Loyalität." },
+                { id: 'ref_128', cat: 'P5', q: "Was ist eine Finanzierung aus Rückstellungen?", o: ["Außenfinanzierung", "Innenfinanzierung", "Eigenfinanzierung", "Beteiligungsfinanzierung"], c: 1, expl: "Finanzierung aus Rückstellungen ist Innenfinanzierung mit Fremdkapitalcharakter. Das Unternehmen bildet Rückstellungen für künftige Verbindlichkeiten und nutzt die Mittel zwischenzeitlich.", memo: "Rückstellungen = Innenfinanzierung + Fremdkapital." },
+                { id: 'ref_129', cat: 'P5', q: "Was ist Kreditfinanzierung?", o: ["Innen + Eigen", "Außen + Fremd", "Innen + Fremd", "Außen + Eigen"], c: 1, expl: "Kreditfinanzierung ist Außenfinanzierung (Kapital kommt von extern) mit Fremdkapitalcharakter (Rückzahlungspflicht + Zinsen). Im Gegensatz dazu: Beteiligungsfinanzierung = Außen + Eigen.", memo: "Kredit = Außen + Fremd. Beteiligung = Außen + Eigen." },
+                { id: 'ref_130', cat: 'P5', q: "Was zeigt die Passivseite der Bilanz?", o: ["Mittelverwendung", "Mittelherkunft", "Umsatzerlöse", "Kostenarten"], c: 1, expl: "Die Passivseite der Bilanz zeigt die Mittelherkunft: Woher stammt das Kapital? (Eigen- und Fremdkapital). Die Aktivseite zeigt die Mittelverwendung (Anlage- und Umlaufvermögen).", memo: "Passiva = Mittelherkunft. Aktiva = Mittelverwendung." },
+                { id: 'ref_131', cat: 'P5', q: "Was gehört zum externen Rechnungswesen?", o: ["Kostenrechnung", "Finanzbuchhaltung", "Deckungsbeitragsrechnung", "Plankostenrechnung"], c: 1, expl: "Externes Rechnungswesen: Finanzbuchhaltung, Bilanz, GuV, ggf. Anhang und Lagebericht. Die Kostenrechnung (Kostenarten-, Kostenstellen-, Kostenträgerrechnung) gehört zum internen Rechnungswesen.", memo: "Extern: FiBu + Bilanz + GuV. Intern: KLR." },
+                { id: 'ref_132', cat: 'P5', q: "Was sind Gemeinkosten?", o: ["Direkt zurechenbar", "Nicht direkt zurechenbar", "Immer variabel", "Immer null"], c: 1, expl: "Gemeinkosten lassen sich nicht direkt einem Kostenträger (Produkt) zurechnen, z.B. Miete, Gehälter. Einzelkosten hingegen sind direkt zurechenbar, z.B. Rohstoffe für ein Produkt.", memo: "Gemeinkosten = nicht direkt zurechenbar. Einzelkosten = direkt." },
+                { id: 'ref_133', cat: 'P5', q: "Welche Kosten zählen zu den fixen Gemeinkosten?", o: ["Rohstoffe", "Akkordlöhne", "Miete und Gehälter", "Provisionen"], c: 2, expl: "Miete und Gehälter sind fixe Gemeinkosten: Sie fallen unabhängig von der Auslastung an und sind nicht direkt einem Produkt zurechenbar. Rohstoffe und Akkordlöhne sind variable Einzelkosten.", memo: "Fix + Gemein: Miete, Gehälter. Variabel + Einzel: Rohstoffe." },
+                { id: 'ref_134', cat: 'P5', q: "Was sind die 7Ps im Dienstleistungsmarketing?", o: ["4Ps + Prozess, Ausstattung, Personal", "4Ps + Prozess, Ausstattung, Forschung", "4Ps + Prozess, Personal, Logistik", "4Ps + Ausstattung, Personal, Controlling"], c: 0, expl: "Die 7Ps erweitern die klassischen 4Ps (Product, Price, Place, Promotion) um: Process (Prozess), Physical Evidence (Ausstattung) und People (Personal). Forschung, Logistik und Controlling gehören nicht dazu.", memo: "7Ps = 4Ps + Prozess + Ausstattung + Personal." },
+                { id: 'ref_135', cat: 'P5', q: "Woraus besteht Corporate Communications?", o: ["Mitarbeitergespräche", "Einheitlicher Kommunikationsstil", "Vorgesetztengespräche", "Kundendialoge"], c: 1, expl: "Corporate Communications ist die Grundsatzentscheidung über den einheitlichen Kommunikationsstil und die Kommunikationsinstrumente. Einzelne Gespräche (MA, Vorgesetzte, Kunden) sind Ausführung, nicht die Strategie.", memo: "CC = einheitlicher STIL der Kommunikation, nicht einzelne Gespräche." },
+                { id: 'ref_136', cat: 'P2', q: "Was unterscheidet Produktivität von Wirtschaftlichkeit?", o: ["Kein Unterschied", "Menge vs. Wert", "Zeit vs. Kosten", "Input vs. Output"], c: 1, expl: "Produktivität = mengenmäßige Ergiebigkeit (Output-Menge / Input-Menge). Wirtschaftlichkeit = wertmäßige Ergiebigkeit (Ertrag in € / Aufwand in €). Beide sind Verhältniszahlen.", memo: "Produktivität = MENGE. Wirtschaftlichkeit = WERT (€)." },
+                { id: 'ref_137', cat: 'P5', q: "Was bedeutet 'Intangibilität' bei Dienstleistungen?", o: ["Lagerbar", "Nicht greifbar", "Teilbar", "Standardisierbar"], c: 1, expl: "Intangibilität bedeutet: Dienstleistungen sind nicht greifbar (immateriell). Folge: Intransparenz und kein Eigentumserwerb möglich. Dies erschwert die Qualitätsbeurteilung vor dem Kauf.", memo: "Intangibel = nicht anfassbar = unsichtbar vor Kauf." },
+                { id: 'ref_138', cat: 'P5', q: "Was ist eine Primärleistung der Notfallrettung?", o: ["Kommunikation", "Rettung von Leben", "Abrechnung", "Dokumentation"], c: 1, expl: "Die Primärleistung der Notfallrettung ist die Rettung von Leben. Sekundärleistungen sind z.B. Kommunikation. Die Vorhalteleistung (ständige Einsatzbereitschaft) ist eine weitere Besonderheit.", memo: "Primär = Leben retten. Sekundär = Kommunikation." },
+                { id: 'ref_139', cat: 'P4', q: "Was kennzeichnet meritorische Güter?", o: ["Rein privat", "Staatlich gefördert", "Frei handelbar", "Luxusgüter"], c: 1, expl: "Meritorische Güter werden vom Staat gefördert, weil sie von der Bevölkerung weniger nachgefragt werden als gesellschaftlich wünschenswert (z.B. Bildung, Gesundheit, Gefahrenabwehr).", memo: "Meritorisch = gut für alle, aber zu wenig nachgefragt → Staat hilft." },
+                { id: 'ref_140', cat: 'P2', q: "Was ist das Formalziel des Wirtschaftens?", o: ["Gewinnmaximierung", "Günstige Input-Output-Relation", "Umsatzsteigerung", "Mitarbeiterzufriedenheit"], c: 1, expl: "Das Formalziel (Leitmaxime) des Wirtschaftens ist eine möglichst günstige Ziel-Mittel-Beziehung (Input-Output-Relation) nach dem ökonomischen Prinzip. Gewinnmaximierung ist ein Sachziel.", memo: "Formalziel = optimale Input-Output-Relation." },
+                { id: 'ref_141', cat: 'P5', q: "Was ist die Prozessqualität nach Donabedian?", o: ["Strukturelle Voraussetzungen", "Art der Leistungserbringung", "Behandlungsergebnis", "Patientenzufriedenheit"], c: 1, expl: "Prozessqualität bezieht sich auf die Art und Weise der Leistungserbringung (diagnostische und therapeutische Maßnahmen). Strukturqualität = Voraussetzungen. Ergebnisqualität = Resultat.", memo: "Prozess = WIE behandelt wird. Struktur = WOMIT. Ergebnis = WAS rauskommt." },
+                { id: 'ref_142', cat: 'P5', q: "Was kennzeichnet die degressive Abschreibung?", o: ["Gleiche Jahresbeträge", "Anfangs höhere Beträge", "Nur im letzten Jahr", "Keine Abschreibung"], c: 1, expl: "Bei der degressiven Abschreibung sind die Abschreibungsbeträge anfangs am höchsten und nehmen über die Nutzungsdauer ab. Im Gegensatz dazu verteilt die lineare Methode gleichmäßig.", memo: "Degressiv = anfangs VIEL, dann weniger. Linear = immer GLEICH." },
+                { id: 'ref_143', cat: 'P5', q: "Was gehört NICHT zu Porters Five Forces?", o: ["Lieferantenmacht", "Substitute", "Technologietrends", "Neue Anbieter"], c: 2, expl: "Die 5 Forces: (1) Rivalität, (2) Lieferantenmacht, (3) Abnehmermacht, (4) Substitute, (5) Neue Anbieter. Technologietrends gehören zur PESTEL-Analyse (Makroumfeld), nicht zu den Five Forces.", memo: "5 Forces = Branchenanalyse. PESTEL = Makroumfeld. Techno → PESTEL!" },
+                { id: 'ref_144', cat: 'P2', q: "Was beschreibt der funktionale Organisationsbegriff?", o: ["Personen mit Weisungsbefugnis", "Zielorientierte Steuerung der Aktivitäten", "Rechtsform des Unternehmens", "Anzahl der Mitarbeiter"], c: 1, expl: "Der funktionale Organisationsbegriff beschreibt die Tätigkeit der zielorientierten Steuerung der Aktivitäten im Unternehmen. Der institutionale Organisationsbegriff sieht das Unternehmen als soziales Gebilde.", memo: "Funktional = WAS getan wird. Institutional = WER es ist." },
+                { id: 'ref_145', cat: 'P2', q: "Was beschreibt Management als Funktion?", o: ["Gruppe von Führungspersonen", "Aufgaben zur Steuerung des Leistungsprozesses", "Organigramm des Unternehmens", "Rechtsform der Gesellschaft"], c: 1, expl: "Management als Funktion knüpft an den Aufgaben zur Steuerung des Leistungsprozesses an. Management als Institution beschreibt die Gruppe von Personen mit Anweisungsbefugnissen.", memo: "Funktion = Aufgaben. Institution = Personen." },
+                { id: 'ref_146', cat: 'P5', q: "Was ist Rentabilität?", o: ["Umsatz pro Mitarbeiter", "Gewinn im Verhältnis zum Kapital", "Lagerumschlag pro Jahr", "Kosten pro Stück"], c: 1, expl: "Rentabilität setzt den Gewinn ins Verhältnis zum eingesetzten Kapital (z.B. Eigenkapitalrentabilität = Gewinn / Eigenkapital). Sie ist ein monetäres Unternehmensziel neben Liquidität und Sicherheit.", memo: "Rentabilität = Gewinn ÷ Kapital. Wie viel Rendite?" },
+                { id: 'ref_147', cat: 'P5', q: "Was bedeutet ein größerer relativer Marktanteil laut BCG?", o: ["Höhere Steuerlast", "Kostenvorteile gegenüber Wettbewerbern", "Geringere Qualität", "Weniger Kunden"], c: 1, expl: "Ein größerer relativer Marktanteil bedeutet Kostenvorteile durch Skaleneffekte (Economies of Scale). Höhere Produktionsmengen senken die Stückkosten und stärken die Wettbewerbsposition.", memo: "Großer Marktanteil = Skaleneffekte = niedrigere Stückkosten." },
+                { id: 'ref_148', cat: 'P5', q: "Was ist eine Nebenbedingung der Beschaffung?", o: ["Umsatzsteigerung", "Senkung von Durchlaufzeiten", "Personalentwicklung", "Produktdesign"], c: 1, expl: "Nebenbedingungen der Beschaffung: Senkung von Beständen und Kapitalbindung, Reduzierung von Durchlaufzeiten, Senkung von Transaktionskosten. Umsatz und Personal sind keine Beschaffungsthemen.", memo: "Beschaffungs-Neben: Bestände ↓, Durchlauf ↓, Transaktionskosten ↓." },
+                { id: 'ref_149', cat: 'P5', q: "Was ist ein Nachteil von Single Sourcing?", o: ["Zu viele Lieferanten", "Hohe Abhängigkeit", "Zu niedrige Qualität", "Zu hohe Vielfalt"], c: 1, expl: "Single Sourcing (ein einziger Lieferant) birgt das Risiko hoher Abhängigkeit: Bei Lieferausfall gibt es keine Alternative. Vorteile sind engere Zusammenarbeit und Mengenrabatte.", memo: "Single Sourcing = 1 Lieferant = hohe Abhängigkeit!" },
+                { id: 'ref_150', cat: 'P5', q: "Was ist ein externer Produktionsfaktor in der DL-Produktion?", o: ["Betriebsmittel", "Patient / Kunde", "Geschäftsleitung", "Werkstoffe"], c: 1, expl: "Der externe Produktionsfaktor ist der Patient/Kunde mit aktiver Mitwirkung oder passiver Beteiligung. Betriebsmittel, Werkstoffe und Geschäftsleitung sind interne Produktionsfaktoren.", memo: "Extern = Patient/Kunde. Intern = Arbeit, Mittel, Werkstoffe, Leitung." },
+                { id: 'ref_151', cat: 'P5', q: "Was zählt zu den internen Produktionsfaktoren?", o: ["Patient", "Elementar- und dispositive Faktoren", "Kunden", "Angehörige"], c: 1, expl: "Interne Produktionsfaktoren: Elementarfaktoren (Arbeit, Betriebsmittel, Werkstoffe) und dispositive Faktoren (Geschäftsleitung, Planung, Organisation). Patient/Kunde ist der externe Faktor.", memo: "Intern = Elementar + Dispositiv. Extern = Patient." },
+                { id: 'ref_152', cat: 'P4', q: "Was gehört zur Strukturqualität nach Donabedian?", o: ["Therapiemaßnahmen", "Personelle Qualifikation und Ausstattung", "Patientenzufriedenheit", "Behandlungsergebnis"], c: 1, expl: "Strukturqualität umfasst personelle Voraussetzungen (Qualifikation) und materielle Elemente (apparative Ausstattung). Therapiemaßnahmen = Prozessqualität. Behandlungsergebnis = Ergebnisqualität.", memo: "Struktur = Personal-Quali + Geräte/Ausstattung." },
+                { id: 'ref_153', cat: 'P5', q: "Was bedeutet 'Physical Evidence' im Marketing-Mix?", o: ["Produktverpackung", "Physische Ausstattung und Erscheinungsbild", "Lieferschein", "Warenlager"], c: 1, expl: "Physical Evidence (Ausstattungspolitik): Das äußere und innere Erscheinungsbild (Architektur, Geschäftsräume, Umgebung). Es macht die intangible Dienstleistung für den Kunden greifbar.", memo: "Physical Evidence = Wie sieht der Laden aus? Räume, Architektur." },
+                { id: 'ref_154', cat: 'P5', q: "Was gehört NICHT zur Corporate Identity?", o: ["Corporate Design", "Corporate Behavior", "Corporate Controlling", "Corporate Communications"], c: 2, expl: "Der CI-Mix besteht aus: Corporate Design (visuell), Corporate Behavior (Verhalten) und Corporate Communications (Kommunikation). 'Corporate Controlling' existiert nicht als CI-Bestandteil.", memo: "CI = Design + Behavior + Communications. Kein Controlling!" },
+                { id: 'ref_155', cat: 'P5', q: "Was ist ein Nachteil der indirekten Führung?", o: ["Zu persönlich", "Fehlende individuelle Beeinflussung", "Zu teuer", "Zu viele Meetings"], c: 1, expl: "Indirekte Führung erfolgt über formale Programme, Systeme und Organisationskultur. Nachteil: Es fehlt die individuelle Beeinflussung des einzelnen Geführten, die nur die direkte Führung bietet.", memo: "Indirekt = System statt Mensch → kein individueller Einfluss." },
+                { id: 'ref_156', cat: 'P5', q: "Welche Bestandteile hat das externe Rechnungswesen?", o: ["FiBu, Bilanz, GuV", "Kostenarten, Kostenstellen", "Plankostenrechnung", "Deckungsbeitragsrechnung"], c: 0, expl: "Externes Rechnungswesen: Finanzbuchhaltung (FiBu), Bilanz und Gewinn- und Verlustrechnung (GuV), ggf. Anhang und Lagebericht. Kostenarten/Kostenstellen gehören zum internen Rechnungswesen.", memo: "Extern = FiBu + Bilanz + GuV + Anhang." },
+                { id: 'ref_157', cat: 'P5', q: "Was untersucht die Kostenartenrechnung?", o: ["Wo Kosten anfallen", "Welche Kosten anfallen", "Wofür Kosten anfallen", "Wann Kosten anfallen"], c: 1, expl: "Kostenartenrechnung: WELCHE Kosten sind angefallen? (z.B. Material, Personal, Abschreibungen). Kostenstellenrechnung: WO? Kostenträgerrechnung: WOFÜR? (welches Produkt).", memo: "Kostenarten = WELCHE. Kostenstellen = WO. Kostenträger = WOFÜR." },
+                { id: 'ref_158', cat: 'P5', q: "Was untersucht die Kostenstellenrechnung?", o: ["Welche Kosten anfallen", "Wo Kosten anfallen", "Wofür Kosten anfallen", "Wie hoch der Umsatz ist"], c: 1, expl: "Kostenstellenrechnung: WO sind die Kosten angefallen? (z.B. Abteilung, Bereich). Die Kostenartenrechnung fragt WELCHE, die Kostenträgerrechnung WOFÜR (Produkt/Auftrag).", memo: "Kostenstellen = WO im Betrieb fallen Kosten an?" },
+                { id: 'ref_159', cat: 'P5', q: "Was untersucht die Kostenträgerrechnung?", o: ["Wo Kosten anfallen", "Welche Kosten anfallen", "Wofür Kosten anfallen", "Wie Kosten gebucht werden"], c: 2, expl: "Kostenträgerrechnung: WOFÜR sind Kosten angefallen? D.h. welches Produkt oder welcher Auftrag verursacht die Kosten. Sie liefert die Grundlage für Preiskalkulation und Stückkostenrechnung.", memo: "Kostenträger = WOFÜR = welches Produkt?" },
+                { id: 'ref_160', cat: 'P5', q: "Welche Grundgröße gehört zum externen Rechnungswesen?", o: ["Kosten und Leistungen", "Aufwand und Ertrag", "Kalkulatorische Zinsen", "Deckungsbeitrag"], c: 1, expl: "Aufwand und Ertrag sind Grundgrößen des externen Rechnungswesens (GuV). Kosten und Leistungen gehören zum internen Rechnungswesen. Kalkulatorische Zinsen und Deckungsbeitrag sind ebenfalls intern.", memo: "Extern: Aufwand/Ertrag + Einzahlung/Auszahlung. Intern: Kosten/Leistungen." },
+                { id: 'ref_161', cat: 'P5', q: "Was ist der Unterschied zwischen Auszahlung und Ausgabe?", o: ["Kein Unterschied", "Auszahlung = Kasse, Ausgabe = Geldvermögen", "Auszahlung = Gewinn, Ausgabe = Verlust", "Ausgabe ist immer höher"], c: 1, expl: "Auszahlung: Abfluss liquider Mittel (Kasse/Bank). Ausgabe: Verminderung des Geldvermögens (liquide Mittel + Forderungen − Verbindlichkeiten). Jede Auszahlung ist eine Ausgabe, aber nicht umgekehrt.", memo: "Auszahlung = Kasse/Bank. Ausgabe = Geldvermögen (weiter gefasst)." }
             ]
         };
 
@@ -1158,32 +1261,50 @@
                 if (wasAnswered) {
                     const c = prevAnswer;
                     const isC = c === q.c;
-                    cont.innerHTML = q.o.map((opt, i) => {
-                        let cls, inner;
-                        if (i === q.c) {
-                            cls = 'bg-orange-50 border-moe-primary text-moe-primary';
-                            inner = `<span class="mr-4 text-2xl">✅</span> <span>${sanitize(opt)}</span>`;
-                        } else if (i === c && !isC) {
-                            cls = 'bg-red-50 border-moe-error text-moe-error';
-                            inner = `<span class="mr-4 text-2xl">❌</span> <span>${sanitize(opt)}</span>`;
-                        } else {
-                            cls = 'bg-gray-50 border-gray-100 text-gray-400 opacity-50';
-                            inner = `<span class="mr-4 opacity-0">⬜</span> <span>${sanitize(opt)}</span>`;
-                        }
-                        return `<button disabled class="w-full text-left p-5 rounded-xl border-2 font-medium flex items-center shadow-sm text-lg ${cls}">${inner}</button>`;
-                    }).join('');
 
-                    /* Show feedback layer with stored data */
-                    const fl = document.getElementById('feedback-layer'); fl.classList.remove('hidden');
-                    document.getElementById('fb-icon').innerText = isC ? '✓' : '✕';
-                    document.getElementById('fb-icon').className = 'w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white ' + (isC ? 'bg-moe-primary' : 'bg-moe-error');
-                    document.getElementById('fb-title').innerText = isC ? 'Exzellent!' : 'Leider falsch';
-                    document.getElementById('fb-title').className = 'font-bold text-2xl mb-1 ' + (isC ? 'text-moe-primary' : 'text-moe-error');
-                    document.getElementById('fb-text').innerHTML = q.expl;
-                    document.getElementById('fb-memo').innerText = q.memo;
-                    document.getElementById('ai-explain-box').classList.add('hidden');
-                    const aiBtn = document.getElementById('ai-explain-btn');
-                    aiBtn.innerHTML = '✨ Lass dir das genauer von der KI erkl\u00e4ren'; aiBtn.disabled = false;
+                    if (isMaster) {
+                        /* MASTER QUIZ: Show neutral selection (no right/wrong reveal) */
+                        cont.innerHTML = q.o.map((opt, i) => {
+                            let cls, inner;
+                            if (i === c) {
+                                cls = 'bg-blue-50 border-blue-400 text-blue-700';
+                                inner = `<span class="w-8 h-8 rounded bg-blue-100 mr-4 flex items-center justify-center font-bold text-blue-600 shrink-0">${String.fromCharCode(65+i)}</span><span>${sanitize(opt)}</span>`;
+                            } else {
+                                cls = 'bg-gray-50 border-gray-100 text-gray-400 opacity-50';
+                                inner = `<span class="w-8 h-8 rounded bg-gray-100 mr-4 flex items-center justify-center font-bold text-gray-300 shrink-0">${String.fromCharCode(65+i)}</span><span>${sanitize(opt)}</span>`;
+                            }
+                            return `<button disabled class="w-full text-left p-5 rounded-xl border-2 font-medium flex items-center shadow-sm text-lg ${cls}">${inner}</button>`;
+                        }).join('');
+                        document.getElementById('feedback-layer').classList.add('hidden');
+                    } else {
+                        /* MODULE QUIZ: Full feedback restore */
+                        cont.innerHTML = q.o.map((opt, i) => {
+                            let cls, inner;
+                            if (i === q.c) {
+                                cls = 'bg-orange-50 border-moe-primary text-moe-primary';
+                                inner = `<span class="mr-4 text-2xl">✅</span> <span>${sanitize(opt)}</span>`;
+                            } else if (i === c && !isC) {
+                                cls = 'bg-red-50 border-moe-error text-moe-error';
+                                inner = `<span class="mr-4 text-2xl">❌</span> <span>${sanitize(opt)}</span>`;
+                            } else {
+                                cls = 'bg-gray-50 border-gray-100 text-gray-400 opacity-50';
+                                inner = `<span class="mr-4 opacity-0">⬜</span> <span>${sanitize(opt)}</span>`;
+                            }
+                            return `<button disabled class="w-full text-left p-5 rounded-xl border-2 font-medium flex items-center shadow-sm text-lg ${cls}">${inner}</button>`;
+                        }).join('');
+
+                        /* Show feedback layer with stored data */
+                        const fl = document.getElementById('feedback-layer'); fl.classList.remove('hidden');
+                        document.getElementById('fb-icon').innerText = isC ? '✓' : '✕';
+                        document.getElementById('fb-icon').className = 'w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white ' + (isC ? 'bg-moe-primary' : 'bg-moe-error');
+                        document.getElementById('fb-title').innerText = isC ? 'Exzellent!' : 'Leider falsch';
+                        document.getElementById('fb-title').className = 'font-bold text-2xl mb-1 ' + (isC ? 'text-moe-primary' : 'text-moe-error');
+                        document.getElementById('fb-text').innerHTML = q.expl;
+                        document.getElementById('fb-memo').innerText = q.memo;
+                        document.getElementById('ai-explain-box').classList.add('hidden');
+                        const aiBtn = document.getElementById('ai-explain-btn');
+                        aiBtn.innerHTML = '✨ Lass dir das genauer von der KI erkl\u00e4ren'; aiBtn.disabled = false;
+                    }
 
                     /* btn-next: enabled, show appropriate text */
                     const next = document.getElementById('btn-next');
@@ -1235,38 +1356,57 @@
                     document.getElementById('progress-bar').style.width = (correctCount / totalQs * 100) + '%';
                 }
                 
+                const isMaster = this.isMasterQuiz();
                 const btns = document.getElementById('options-container').children;
                 for(let i=0; i<btns.length; i++) { 
                     btns[i].disabled = true; 
                     btns[i].className = "w-full text-left p-5 rounded-xl border-2 font-medium flex items-center shadow-sm text-lg";
-                    if(i === q.c) {
-                        btns[i].classList.add('bg-orange-50', 'border-moe-primary', 'text-moe-primary');
-                        btns[i].innerHTML = `<span class="mr-4 text-2xl">✅</span> <span>${sanitize(q.o[i])}</span>`;
-                    } else if(i === c && !isC) {
-                        btns[i].classList.add('bg-red-50', 'border-moe-error', 'text-moe-error');
-                        btns[i].innerHTML = `<span class="mr-4 text-2xl">❌</span> <span>${sanitize(q.o[i])}</span>`;
+                    if (isMaster) {
+                        /* MASTER QUIZ: No right/wrong reveal — only highlight chosen answer neutrally */
+                        if (i === c) {
+                            btns[i].classList.add('bg-blue-50', 'border-blue-400', 'text-blue-700');
+                            btns[i].innerHTML = `<span class="w-8 h-8 rounded bg-blue-100 mr-4 flex items-center justify-center font-bold text-blue-600 shrink-0">${String.fromCharCode(65+i)}</span><span>${sanitize(q.o[i])}</span>`;
+                        } else {
+                            btns[i].classList.add('bg-gray-50', 'border-gray-100', 'text-gray-400', 'opacity-50');
+                            btns[i].innerHTML = `<span class="w-8 h-8 rounded bg-gray-100 mr-4 flex items-center justify-center font-bold text-gray-300 shrink-0">${String.fromCharCode(65+i)}</span><span>${sanitize(q.o[i])}</span>`;
+                        }
                     } else {
-                        btns[i].classList.add('bg-gray-50', 'border-gray-100', 'text-gray-400', 'opacity-50');
-                        btns[i].innerHTML = `<span class="mr-4 opacity-0">⬜</span> <span>${sanitize(q.o[i])}</span>`;
+                        /* MODULE QUIZ: Full feedback with ✅/❌ */
+                        if(i === q.c) {
+                            btns[i].classList.add('bg-orange-50', 'border-moe-primary', 'text-moe-primary');
+                            btns[i].innerHTML = `<span class="mr-4 text-2xl">✅</span> <span>${sanitize(q.o[i])}</span>`;
+                        } else if(i === c && !isC) {
+                            btns[i].classList.add('bg-red-50', 'border-moe-error', 'text-moe-error');
+                            btns[i].innerHTML = `<span class="mr-4 text-2xl">❌</span> <span>${sanitize(q.o[i])}</span>`;
+                        } else {
+                            btns[i].classList.add('bg-gray-50', 'border-gray-100', 'text-gray-400', 'opacity-50');
+                            btns[i].innerHTML = `<span class="mr-4 opacity-0">⬜</span> <span>${sanitize(q.o[i])}</span>`;
+                        }
                     }
                 }
                 
-                const fl = document.getElementById('feedback-layer'); fl.classList.remove('hidden');
-                document.getElementById('fb-icon').innerText = isC ? '✓' : '✕';
-                document.getElementById('fb-icon').className = "w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white " + (isC ? 'bg-moe-primary' : 'bg-moe-error');
-                document.getElementById('fb-title').innerText = isC ? 'Exzellent!' : 'Leider falsch';
-                document.getElementById('fb-title').className = "font-bold text-2xl mb-1 " + (isC ? 'text-moe-primary' : 'text-moe-error');
-                /* NOTE: q.expl is from internal DB, trusted HTML content */
-                document.getElementById('fb-text').innerHTML = q.expl; 
-                document.getElementById('fb-memo').innerText = q.memo;
-                
-                const aiBtn = document.getElementById('ai-explain-btn');
-                aiBtn.innerHTML = "✨ Lass dir das genauer von der KI erklären"; aiBtn.disabled = false;
+                if (isMaster) {
+                    /* MASTER QUIZ: No feedback layer — hide explanation, memo, AI button */
+                    document.getElementById('feedback-layer').classList.add('hidden');
+                } else {
+                    /* MODULE QUIZ: Show full feedback */
+                    const fl = document.getElementById('feedback-layer'); fl.classList.remove('hidden');
+                    document.getElementById('fb-icon').innerText = isC ? '✓' : '✕';
+                    document.getElementById('fb-icon').className = "w-12 h-12 rounded-full flex items-center justify-center shrink-0 text-2xl font-bold text-white " + (isC ? 'bg-moe-primary' : 'bg-moe-error');
+                    document.getElementById('fb-title').innerText = isC ? 'Exzellent!' : 'Leider falsch';
+                    document.getElementById('fb-title').className = "font-bold text-2xl mb-1 " + (isC ? 'text-moe-primary' : 'text-moe-error');
+                    /* NOTE: q.expl is from internal DB, trusted HTML content */
+                    document.getElementById('fb-text').innerHTML = q.expl; 
+                    document.getElementById('fb-memo').innerText = q.memo;
+                    
+                    const aiBtn = document.getElementById('ai-explain-btn');
+                    aiBtn.innerHTML = "✨ Lass dir das genauer von der KI erklären"; aiBtn.disabled = false;
+                }
                 
                 const next = document.getElementById('btn-next'); next.disabled = false; next.innerText = (this.state.session.idx === this.state.session.qs.length-1) ? "Prüfung beenden" : "Nächste Frage ❯";
 
                 /* Disable skip button after answering (use btn-next instead) */
-                if (!this.isMasterQuiz()) {
+                if (!isMaster) {
                     document.getElementById('btn-skip').disabled = true;
                 }
 
@@ -1395,6 +1535,15 @@
                 } else {
                     const pillar = contentDB.pillars.find(p => p.id === this.state.session.mode);
                     subtitleEl.innerText = pillar ? pillar.title : 'Zusammenfassung deiner Leistung.';
+                }
+
+                /* Render master review section if in master quiz mode */
+                const reviewEl = document.getElementById('master-review-section');
+                if (this.state.session.mode === 'all') {
+                    this.renderMasterReview(reviewEl);
+                } else {
+                    reviewEl.classList.add('hidden');
+                    reviewEl.innerHTML = '';
                 }
 
                 this.switchView('view-results'); this.renderDashboard();
@@ -1536,6 +1685,73 @@
                         if (e.key === ' ') { e.preventDefault(); this.flipFlashcard(); return; }
                     }
                 });
+            },
+
+            /* ============================================================
+             * MASTER QUIZ REVIEW SECTION
+             * ============================================================ */
+            renderMasterReview: function(container) {
+                const qs = this.state.session.qs;
+                const answers = this.state.session.answers;
+                let html = '';
+
+                html += `<div class="bg-white rounded-xl shadow-xl border-t-4 border-moe-primary p-8 mb-6">`;
+                html += `<h3 class="text-2xl font-bold text-moe-gray mb-2">Detaillierte Auswertung</h3>`;
+                html += `<p class="text-gray-500 text-sm mb-6">Alle ${qs.length} Fragen mit deiner Antwort, der korrekten L\u00f6sung und Erkl\u00e4rung.</p>`;
+
+                for (let i = 0; i < qs.length; i++) {
+                    const q = qs[i];
+                    const chosen = answers[i];
+                    const isCorrect = chosen === q.c;
+                    const borderColor = chosen === undefined ? 'border-gray-200' : (isCorrect ? 'border-green-300' : 'border-red-300');
+                    const bgColor = chosen === undefined ? 'bg-gray-50' : (isCorrect ? 'bg-green-50' : 'bg-red-50');
+                    const icon = chosen === undefined ? '\u2014' : (isCorrect ? '\u2705' : '\u274c');
+                    const statusText = chosen === undefined ? 'Nicht beantwortet' : (isCorrect ? 'Richtig' : 'Falsch');
+                    const statusColor = chosen === undefined ? 'text-gray-400' : (isCorrect ? 'text-green-600' : 'text-red-600');
+
+                    html += `<div class="${bgColor} border ${borderColor} rounded-xl p-5 mb-4">`;
+                    html += `<div class="flex items-start gap-3 mb-3">`;
+                    html += `<span class="text-xl mt-0.5">${icon}</span>`;
+                    html += `<div class="flex-1">`;
+                    html += `<div class="flex items-center gap-2 mb-1"><span class="text-xs font-bold text-gray-400 uppercase">Frage ${i + 1}</span><span class="text-xs font-bold ${statusColor}">${statusText}</span></div>`;
+                    html += `<p class="font-bold text-gray-800 text-base leading-snug">${sanitize(q.q)}</p>`;
+                    html += `</div></div>`;
+
+                    /* Options list */
+                    html += `<div class="ml-9 space-y-1.5 mb-3">`;
+                    for (let j = 0; j < q.o.length; j++) {
+                        let optCls = 'text-gray-500';
+                        let prefix = String.fromCharCode(65 + j);
+                        let suffix = '';
+                        if (j === q.c) {
+                            optCls = 'text-green-700 font-bold';
+                            suffix = ' \u2190 korrekt';
+                        }
+                        if (chosen !== undefined && j === chosen && j !== q.c) {
+                            optCls = 'text-red-600 line-through';
+                            suffix = ' \u2190 deine Wahl';
+                        }
+                        if (j === chosen && j === q.c) {
+                            suffix = ' \u2190 deine Wahl \u2713';
+                        }
+                        html += `<p class="text-sm ${optCls}"><span class="font-mono mr-1">${prefix})</span> ${sanitize(q.o[j])}${suffix}</p>`;
+                    }
+                    html += `</div>`;
+
+                    /* Explanation */
+                    html += `<div class="ml-9 bg-white/70 rounded-lg p-3 border border-gray-200">`;
+                    html += `<p class="text-sm text-gray-600"><span class="font-bold text-moe-primary">Erkl\u00e4rung:</span> ${sanitize(q.expl)}</p>`;
+                    if (q.memo) {
+                        html += `<p class="text-xs text-gray-400 mt-1 italic">\ud83d\udca1 ${sanitize(q.memo)}</p>`;
+                    }
+                    html += `</div>`;
+
+                    html += `</div>`;
+                }
+
+                html += `</div>`;
+                container.innerHTML = html;
+                container.classList.remove('hidden');
             },
 
             /* OPT #4: Mobile swipe for flashcards */
